@@ -3,6 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import './iview'
+import VueResource from 'vue-resource'
+import _ from 'lodash'//lodash的全局变量
+//jquery已经在webpack.base.conf.js配置成全局变量
+
+Vue.use(VueResource);
 
 Vue.config.productionTip = false
 
