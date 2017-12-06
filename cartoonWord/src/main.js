@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import './iview'
 import VueResource from 'vue-resource'
+import './site'
 import _ from 'lodash'//lodash的全局变量
 //jquery已经在webpack.base.conf.js配置成全局变量
 
