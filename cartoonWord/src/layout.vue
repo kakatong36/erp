@@ -36,11 +36,14 @@
                 </Menu>
             </div>
             <div id="face">
-                <Tabs type="card" closable :animated='false' @on-tab-remove="handleTabRemove">
-                    <TabPane label='动漫'>动漫</TabPane>
+                <router-view id="main" ></router-view>
+               <!-- <Tabs type="card" closable :animated='false' @on-tab-remove="handleTabRemove">
+                    <TabPane label='动漫'>
+
+                    </TabPane>
                     <TabPane label='动画'>动画</TabPane>
                     <TabPane label='漫画'>漫画</TabPane>
-                </Tabs>
+                </Tabs>-->
             </div>
         </div>
         <div id="footer">

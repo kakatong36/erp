@@ -1,0 +1,79 @@
+.ivu-table-wrapper {
+    margin-bottom: 1em;
+}
+
+.ivu-page {
+    margin-bottom: 1em;
+}
+
+.ivu-input[disabled],
+fieldset[disabled] .ivu-input,
+.ivu-select-disabled .ivu-select-selection {
+    color: inherit;
+}
+
+
+/*
+.ivu-input-group-append, .ivu-input-group-prepend{
+    background-color: inherit;
+}
+*/
+
+.page.simpleList {
+    .tablebar {
+        margin-bottom: 1em;
+    }
+}
+
+input {
+    -webkit-appearance: none;
+}
+
+//单据审核通过、不通过
+.examineSuccess {
+    position: absolute;
+    top: 25px;
+    right: 130px;
+    width: 200px;
+    height: 75px;
+    background: url("assets/examine.png") no-repeat 0 0;
+    background-size: 200px;
+}
+
+.examineFail {
+    position: absolute;
+    top: 25px;
+    right: 130px;
+    width: 200px;
+    height: 75px;
+    background: url("assets/examine.png") no-repeat 0 -100px;
+    background-size: 200px;
+}
+
+.small-table {
+    .ivu-table-cell {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .ivu-cascader {
+        .ivu-cascader-menu-item {
+            padding: 4px 16px;
+        }
+    }
+    .ivu-checkbox-wrapper {
+        margin-right: 0px;
+    }
+    .ivu-select-item {
+        padding: 4px 16px;
+    }
+    td,
+    th {
+        height: 30px;
+    }
+}
+
+.padding-table {
+    .ivu-table-body {
+        padding-bottom: 70px;
+    }
+}

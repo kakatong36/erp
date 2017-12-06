@@ -1,5 +1,6 @@
 import menu from './menu'
 import api from './api'
+import formCommon from './formCommon'
 
 global.Site = {
     http: (opts, isLogin) => {
@@ -104,5 +105,6 @@ global.Site = {
       return obj;
     },
     api: api,
-    menu: menu
+    menu: menu,
+    formCommon: formCommon
 };
