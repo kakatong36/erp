@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
@@ -10,12 +9,12 @@ export default new Router({
       path: '/',
       name: 'layout',
       component: resolve => require(['@/layout'], resolve),
-      redirect: '/HelloWorld',
+      redirect: '/commonList',
       children: [
         {
-          path: '/HelloWorld',
-          name: 'HelloWorld',
-          component: resolve => require(['@/components/HelloWorld'], resolve)
+          path: '/commonList',
+          name: 'commonList',
+          component: resolve => require(['@/components/form/list'], resolve)
         }
       ]
     }
