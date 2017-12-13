@@ -9,8 +9,13 @@ export default new Router({
       path: '/',
       name: 'layout',
       component: resolve => require(['@/layout'], resolve),
-      redirect: '/commonList',
+      redirect: '/home',
       children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: resolve => require(['@/home'], resolve)
+        },
         {
           path: '/commonList',
           name: 'commonList',

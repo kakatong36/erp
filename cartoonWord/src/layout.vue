@@ -6,7 +6,7 @@
         </div>
         <div id="content">
             <div id="sidebar">
-                <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
+                <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']">
                     <div class="layout-logo-left"></div>
                     <Submenu name="1">
                         <template slot="title">
