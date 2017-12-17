@@ -2,46 +2,51 @@
     <div class="page simpleList mainPadding" :class="pageClass">
       <div class="innerBorder ListfullHeight">
             <div class='timeLineArea'>
-                <Form ref='form' style='width:600px;' :label-width="80" :model="formData" inline :rules="formDataValidate" inline onsubmit="return false">
+                <Form ref='form' style='width:600px;' :label-width="80" :model="formData" inline :rules="formDataValidate"  onsubmit="return false">
                     <Form-item prop='email' label = '邮箱'>
-                        <Input v-model='formData.email'></Input>
+                        <Input v-model='formData.email' />
                     </Form-item>
                     <Form-item prop='phone' label = '固定电话'>
-                        <Input v-model='formData.phone'></Input>
+                        <Input v-model='formData.phone' />
                     </Form-item>
                     <Form-item prop='mobilePhone' label = '手机号码'>
-                        <Input v-model='formData.mobilePhone'></Input>
+                        <Input v-model='formData.mobilePhone' />
                     </Form-item>
                     <Form-item prop='twoPhone' label = '手机号码+固定电话'>
-                        <Input v-model='formData.twoPhone'></Input>
+                        <Input v-model='formData.twoPhone' />
                     </Form-item>
                     <Form-item prop='number' label = '纯数字'>
-                        <Input v-model='formData.number'></Input>
+                        <Input v-model='formData.number' />
                     </Form-item>
                     <Form-item prop='price' label = '价格'>
-                        <Input v-model='formData.price'></Input>
+                        <Input v-model='formData.price' />
                     </Form-item>
                     <Form-item prop='BusinessDate' label = '日期'>
                         <DatePicker type="date" :value='formData.BusinessDate' placeholder="请选择" @on-change="handleDateSelected($event, 'BusinessDate')"></DatePicker>
                     </Form-item>
                     <Form-item prop='date' label = '日期'>
-                        <Input v-model='formData.date'></Input>
+                        <Input v-model='formData.date' />
                     </Form-item>
                     <Form-item prop='chinese' label = '中文'>
-                        <Input v-model='formData.chinese'></Input>
+                        <Input v-model='formData.chinese' />
                     </Form-item>
                     <Form-item prop='dword' label = '双字节字符'>
-                        <Input v-model='formData.dword'></Input>
+                        <Input v-model='formData.dword' />
                     </Form-item>
                     <Form-item prop='coin' label = '货币'>
-                        <Input v-model='formData.coin'></Input>
+                        <Input v-model='formData.coin' />
                     </Form-item>
                     <Form-item prop='num' label = '数值'>
-                        <Input v-model='formData.num'></Input>
+                        <Input v-model='formData.num' />
                     </Form-item>
                     <Form-item prop='idcard' label = '身份证号'>
-                        <Input v-model='formData.idcard'></Input>
+                        <Input v-model='formData.idcard' />
                     </Form-item>
+                    <Form-Item label='重量区间' prop="StartWeight">
+                        <Input v-model="formData['StartWeight']" :autosize="true" style="width:40px;"/> <span>&nbsp;ct</span>
+                        <span>&nbsp; - &nbsp;</span>
+                        <Input v-model="formData['EndWeight']" :autosize="true" style="width:40px;"/> <span>&nbsp;ct</span>
+                    </Form-Item>
                     <Form-item>
                         <Button type="primary" @click="handleSubmit">提交</Button>
                         <Button type="ghost" @click="handleReset" style="margin-left: 8px">重置</Button>
@@ -56,9 +61,73 @@
     export default {
         name: 'commonList',
         data () {
+            
+        const intCheck = (item, rule, value, callback, required) => {
+                if(!required){
+                    if(value == ''){
+                        callback()
+                        return
+                    }
+                }else{
+                    if(value === '' || value === undefined || value == null){
+                        callback(new Error('请输入' + item))
+                        return
+                    }
+                }
+                if(!Number.isInterger(+value)){
+                    callback(new Error('请输入整数'))
+                }else{
+                    if(value < 0){
+                        callback(new Error(item + '不能小于0'))
+                    }
+                }
+        }
+        const floatCheck = (name,item, rule, value, callback, required) => {
+                if(!required){
+                    if(value === '' || value === undefined || value === null){
+                        callback()
+                        return
+                    }
+                }else{
+                    if(value === '' || value === undefined || value === null){
+                        callback(new Error('请输入' + item))
+                        return
+                    }
+                }
+                let reg = /^(-?\d+)(\.\d+)?$/
+                value = value.trim?value.trim():value
+                if(!reg.test(value) || isNaN(parseFloat(value))){
+                    callback(new Error('请输入数值'))
+                }else{
+                    if(value < 0){
+                        callback(new Error(item + '不能小于0'))
+                    }else{
+                        let start = this.formData['StartWeight'] == '' ? 0 : parseFloat(this.formData['StartWeight'])
+                        let end = this.formData['EndWeight'] == 0 ? 0 : parseFloat(this.formData['EndWeight'])
+                        if(start > end){
+                            if(name == 'StartWeight'){
+                                callback(new Error('左边数值须小于右边'))
+                            }else{
+                                callback(new Error('右边数值须大于左边'))
+                            }
+                        }else{
+                            callback()
+                        }
+                    }
+                }
+        }
+        const validateStartWeight = (rule, value, callback) => {
+                floatCheck('StartWeight','起始数值', rule, value, callback, false)
+        }
+        const validateEndWeight = (rule, value, callback) => {
+                floatCheck('EndWeight','结束数值', rule, value, callback, false)
+        }
+        
             return {
                 pageClass: '',
                 formData: {
+                    StartWeight: '',
+                    EndWeight: '',
                     email: '',
                     phone: '',
                     mobilePhone: '',
@@ -74,6 +143,16 @@
                     idcard: ''
                 },
                 formDataValidate: {
+                    StartWeight: [
+                        {
+                            validator: validateStartWeight, trigger: 'blur, change'
+                        }
+                    ],
+                    EndWeight: [
+                        {
+                            validator: validateEndWeight, trigger: 'blur, change'
+                        }
+                    ],
                     email: [
                         { required: true,validator: Site.formCommon.isEmail,trigger: 'blur'}
                     ],
