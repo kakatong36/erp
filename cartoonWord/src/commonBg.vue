@@ -82,6 +82,7 @@ export default {
     width: 50%;
     text-align: left;
     font-size: 1.2em;
+    border: 1px solid red;
 }
 .introContent p{
     margin: 3% 0 5%;
@@ -95,13 +96,12 @@ export default {
     margin: 1% 0;
 }
 .pageFooter{
-    height: 60px;
     margin: 1% 0 0;
     text-align: center;
     background: rgb(24,22,35);
 }
 .pageFooter ul{
-    padding: 0.7% 0 0;
+    padding: 1% 0;
 }
 .pageFooter a{
     color: rgba(255,255,255,0.8);

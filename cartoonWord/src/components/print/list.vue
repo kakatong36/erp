@@ -73,6 +73,18 @@ export default {
         'v-pageBottomPart': pageBottomPart
     }
 }
+$(window).resize(resizeCanvas);  
+let btnImg = $('.btnImg');
+ function resizeCanvas() {
+     let a = window.innerWidth/10.80 + 'px';
+    // btnImg[0].style.fontSize = window.innerWidth/10.80 + 'px'  
+    // btnImg.css({
+    //     top: a
+    // })
+ };  
+   
+ resizeCanvas();  
+
 </script>
 
 <style lang="">
