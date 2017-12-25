@@ -22,6 +22,11 @@ export default new Router({
           component: resolve => require(['@/components/form/list'], resolve)
         }
       ]
+    },
+    {
+      path: '/printFace',
+      name: 'printFace',
+      component: resolve => require(['@/components/print/list'], resolve)
     }
   ]
 })

@@ -47,6 +47,14 @@
                         <span>&nbsp; - &nbsp;</span>
                         <Input v-model="formData['EndWeight']" :autosize="true" style="width:40px;"/> <span>&nbsp;ct</span>
                     </Form-Item>
+                    <Form-item prop='father' label = '父亲'>
+                        <Select v-model='formData.father' clearable @on-change="handleSelectSelected">
+                            <Option v-for="item in fatherList" :value="item.Id" :key="item.Id" >{{ item.Name }}</Option>
+                        </Select>
+                    </Form-item>
+                    <Form-item prop='son' label = '儿子'>
+                        <Cascader :data="childrenList" change-on-select v-model="childrenName" ></Cascader>
+                    </Form-item>
                     <Form-item>
                         <Button type="primary" @click="handleSubmit">提交</Button>
                         <Button type="ghost" @click="handleReset" style="margin-left: 8px">重置</Button>
@@ -125,7 +133,21 @@
         
             return {
                 pageClass: '',
+                isEmpty: true,
+                childrenName: [],
+                childrenList: [],
+                fatherList: [
+                    {
+                        Id: 'big',
+                        Name: '大父亲'
+                    },{
+                        Id: 'small',
+                        Name: '小父亲'
+                    }
+                ],
+
                 formData: {
+                    father: null,
                     StartWeight: '',
                     EndWeight: '',
                     email: '',
@@ -217,11 +239,57 @@
                         
                     })
                 }
+            },
+            handleSelectSelected(value){
+                if(this.isEmpty){
+                    this.childrenName = [];
+                }else{
+                    this.isEmpty = true;
+                }
+                if(value == 'big'){
+                    this.childrenList = [{
+                        value: 'bigSon',
+                        label: '大儿子',
+                        children: [
+                            {
+                                value: 'bigSonSon',
+                                label: '大孙子'
+                            },{
+                                value: 'bigTwoSon',
+                                label: '大二孙子'
+                            }
+                        ]
+                    }]
+                }else{
+                    this.childrenList = [{
+                        value: 'smallSon',
+                        label: '小儿子',
+                        children: [
+                            {
+                                value: 'smallSonSon',
+                                label: '小孙子'
+                            },{
+                                value: 'smallTwoSon',
+                                label: '小二孙子'
+                            }
+                        ]
+                    }]
+
+                }
+            },
+            getFormData (){
+                this.formData.father = 'big';
+                this.isEmpty = false; //不清空
+                this.childrenName = ['bigSon','bigSonSon'];
             }
         },
         created (){
             this.pageClass = page.pageName;
             this.formDataValidateComplate();
+            this.getFormData();
+        },
+        actived (){
+            this.getFormData();
         }
     }
 

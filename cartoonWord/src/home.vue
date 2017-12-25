@@ -22,7 +22,7 @@ export default {
             // console.log(cloneArr[0] === this.dataArr[0]);
         }
     },
-    created (){
+    created (){ 
         this.test()
     }
 }
