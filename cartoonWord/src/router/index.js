@@ -20,6 +20,11 @@ export default new Router({
           path: '/commonList',
           name: 'commonList',
           component: resolve => require(['@/components/form/list'], resolve)
+        },
+        {
+          path: '/printStoneOut',
+          name: 'printStoneOut',
+          component: resolve => require(['@/components/cssTotal/list'], resolve)
         }
       ]
     },

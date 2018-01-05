@@ -1,8 +1,14 @@
 <template>
     <div class='contentLayer'>
+        <div id = 'pageTop'></div>
         <div id='shadow' class='postLoginShow' @click='makeShadowHide'></div>
-        <img src='../../assets/loginbg.png' class='imgDiv'>
-        <Button type='primary' class='btnImg' @click='getLoginForm'></Button>
+        <div class='headerArea'>
+            <img src='../../assets/loginbg.png' class='imgDiv'>
+            <div class='mouseArea'>
+                <img src="../../assets/mouse.png" @click="scrollSymbel">
+            </div>
+            <Button type='primary' class='btnImg' @click='getLoginForm'></Button>
+        </div>
         <Card class="page login postLoginShow">
             <span slot="title" class='headerAction isAction'><a>登录</a></span>
             <span slot="title" class='headerAction' @click='toSign'><a>注册</a></span>
@@ -67,6 +73,12 @@ export default {
             $('.postLoginShow').css({
                 display: 'none'
             })
+        },
+        scrollSymbel(){
+            //找锚点
+            $("html, body").animate({
+                scrollTop: $("#mykey").offset().top }, {duration: 500,easing: "swing"});
+            return false;
         }
     },
     components:{
@@ -85,6 +97,19 @@ let btnImg = $('.btnImg');
    
  resizeCanvas();  
 
+
+//滚动条位置监听
+$(window).scroll(function(event){
+    // console.log(event);
+    var top = $(window).scrollTop();
+    // console.log(top);
+    // if(top = 500){
+    //         $("html, body").animate({
+    //             scrollTop: $("#mykey").offset().top }, {duration: 500,easing: "swing"});
+    //         return false;
+        
+    // }
+});
 </script>
 
 <style lang="">
@@ -119,16 +144,12 @@ let btnImg = $('.btnImg');
         margin-bottom: 1em;
     /* } */
 }
-.contentLayer{
-    width: 100%;
-    position: relative;
-}
-.imgDiv{
+.imgDiv,.contentLayer{
     width: 100%;
 }
 .btnImg{
-    width: 130px;
-    height: 47px;
+    width: 126px;
+    height: 45px;
     border: none;
     border-radius: 5px;
     position: absolute;
@@ -167,5 +188,18 @@ let btnImg = $('.btnImg');
     z-index: 1;
     top: 0;
     background: rgba(0,0,0,0.5);
+}
+
+
+
+
+.headerArea{
+    width: 100%;
+    position: relative;
+}
+.mouseArea{
+    position: absolute;
+    bottom: 15%;
+    margin: 0 50%;
 }
 </style>
