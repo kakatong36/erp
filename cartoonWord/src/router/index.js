@@ -32,6 +32,12 @@ export default new Router({
       path: '/printFace',
       name: 'printFace',
       component: resolve => require(['@/components/print/list'], resolve)
-    }
+	}
+	// ,
+    // {
+    //   path: '/printFace',
+    //   name: 'printFace',
+    //   component: resolve => require(['@/components/print/list'], resolve)
+    // }
   ]
 })
