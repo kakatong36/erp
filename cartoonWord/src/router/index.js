@@ -25,6 +25,11 @@ export default new Router({
           path: '/printStoneOut',
           name: 'printStoneOut',
           component: resolve => require(['@/components/cssTotal/list'], resolve)
+        },
+        {
+          path: '/suit',
+          name: 'suit',
+          component: resolve => require(['@/components/suit/list'], resolve)
         }
       ]
     },

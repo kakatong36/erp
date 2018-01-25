@@ -10,9 +10,11 @@ import './site'
 import _ from 'lodash'//lodash的全局变量
 //jquery已经在webpack.base.conf.js配置成全局变量
 
-Vue.use(VueResource);
+import jqTable from './components/widget/jqTable'
 
+Vue.use(VueResource);
 Vue.config.productionTip = false
+Vue.component('jqTable', jqTable)
 
 /* eslint-disable no-new */
 new Vue({
