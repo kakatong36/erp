@@ -20,6 +20,7 @@ import '../../../static/jqwidgets/jqxdatetimeinput.js'
 
 
 import '../../../static/jqwidgets/jqxgrid-2.js'
+// import '../../../static/jqwidgets/jqxgrid-pinned.js'
 import '../../../static/jqwidgets/jqxgrid.edit-2.js'
 import '../../../static/jqwidgets/jqxgrid.columnsresize.js'
 import '../../../static/jqwidgets/jqxgrid.aggregates.js'
@@ -27,6 +28,8 @@ import '../../../static/jqwidgets/jqxgrid.selection-2.js'
 import '../../../static/jqwidgets/jqxgrid.sort-2.js'
 import '../../../static/jqwidgets/jqxgrid.storage.js'
 import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
+import '../../../static/jqwidgets/jqxmenu.js'
+import '../../../static/jqwidgets/jqxgrid.filter.js'
 
 
 // showloadelement, hideloadelement
@@ -38,7 +41,7 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 				dataAdapter: {},
 				config: {},
 				source: {},
-
+				
 				//列选择使用
 				isSelecting: false,
 				currentSelectCol: null,
@@ -131,7 +134,7 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 					}
 				};
 				let columns = [
-					{text: '序号', datafield: '_index', width: 40, editable: false,
+					{text: '行号', datafield: '_index', width: 40, editable: false,
 						cellsrenderer: function (index) {
 							return `<div class="cellContainer">${index + 1}</div>`;
 						}
@@ -144,6 +147,8 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 							option.cellsrenderer = value(vm);
 						}else if(key == 'createHeader'){ //表头
 							option.renderer = value(vm);
+						}else if(key == 'headerRendered'){
+							option.rendered = value(vm)
 						}else if(key == 'createEditor'){ //编辑框
 							option.initeditor = value(vm);
 						}else if(key == 'createChange'){ //数据改变时
@@ -156,8 +161,8 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 							option[key] = value;
 						}
 					});
-					if(option.pinned == true){
-						columns[0].pinned = true;
+					if(option.pinned){
+						columns[0].pinned = 'left';	//序号左对齐
 					}
 					columns.push(option);
 				});
@@ -247,10 +252,10 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 					list = [];
 				_.each(data, item => {
 					item = _.extend({}, item);
-					delete item.boundindex;
-					delete item.uid;
-					delete item.uniqueid;
-					delete item.visibleindex;
+					// delete item.boundindex;
+					// delete item.uid;
+					// delete item.uniqueid;
+					// delete item.visibleindex;
 					list.push(item);
 				});
 				if(_.isArray(indexs)){
@@ -270,6 +275,38 @@ import '../../../static/jqwidgets/jqxgrid.columnsreorder.js'
 					}
 				}
                 return list;
+			},
+			delete(ids){
+				if(ids === null || ids === undefined || ids === ''){
+					return
+				}
+				if(Object.prototype.toString.call(ids) == "[object Object]"){
+					return
+				}
+				this.el.jqxGrid('deleterow', ids)
+				this.render()
+			},
+			render(){
+				this.el.jqxGrid('render')
+			},
+			setCellsValue(values){
+				if(values === null || values === undefined || values === ''){
+					return
+				}
+				if(Object.prototype.toString.call(values) == "[object Object]"){
+					this.el.jqxGrid('setcellvalue', values.index, values.datafield, values.value)
+				}
+				if(_.isArray(values)){
+					_.each(values, item => {
+						this.el.jqxGrid('setcellvalue', item.index, item.datafield, item.value)
+					})
+				}
+			},
+			hidevalidationpopups(rowIndex, datafield){
+				this.el.jqxGrid('hidevalidationpopups', rowIndex, datafield)
+			},
+			showvalidationpopup(rowIndex, datafield, tip){
+				this.el.jqxGrid('showvalidationpopup', rowIndex, datafield, tip)
 			}
         }
 	}
@@ -318,7 +355,6 @@ function formatValue(data, datafields){
 			});
 			newData[key] = value;
 		});
-
 		//补全字段
 		_.each(datafields, item => {
 			if(data[item.name]  === undefined){
@@ -343,9 +379,9 @@ function formatValue(data, datafields){
 }
 </script>
 
-<!--<style lang="scss">
+<style lang="scss">
 .jqTable{
-	margin-bottom: 1em;
+	margin-bottom: 1em !important;
 	.jqx-widget-header{
 		border-color: #dddee1;
     	background: #f8f8f9;;
@@ -379,4 +415,4 @@ function formatValue(data, datafields){
 body.jqTableProceeding{
     cursor: wait;
 }
-</style>-->
+</style>

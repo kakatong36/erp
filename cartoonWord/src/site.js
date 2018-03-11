@@ -2,6 +2,10 @@ import menu from './menu'
 import api from './api'
 import formCommon from './formCommon'
 
+import '../static/jqwidgets/globalization/globalize.js'
+import '../static/jqwidgets/globalization/globalize-zh.js'
+
+
 global.Site = {
     http: (opts, isLogin) => {
         let dtd = $.Deferred(),
@@ -103,8 +107,9 @@ global.Site = {
         obj ={};
       }
       return obj;
-    },
+	},
     api: api,
     menu: menu,
-    formCommon: formCommon
+    formCommon: formCommon,
+    globalize: document.Globalize //日期，数字，货币格式化
 };
