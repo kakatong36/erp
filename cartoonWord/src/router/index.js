@@ -27,8 +27,8 @@ export default new Router({
           component: resolve => require(['@/components/cssTotal/list'], resolve)
         },
         {
-          path: '/suit',
-          name: 'suit',
+          path: '/detailField',
+          name: 'detailField',
           component: resolve => require(['@/components/suit/list'], resolve)
         }
       ]
