@@ -11,7 +11,7 @@
         </div>
         <Card class="page login postLoginShow">
             <span slot="title" class='headerAction isAction'><a>登录</a></span>
-            <span slot="title" class='headerAction' @click='toSign'><a>注册</a></span>
+            <!-- <span slot="title" class='headerAction' @click='toSign'><a>注册</a></span> -->
             <Form ref="formData" :model="formData" :rules="formDataValidate" :label-width="70" onsubmit="return false">
                 <Form-item label="账号" prop="Mobile">
                     <Input v-model="formData.Mobile" placeholder="请输入账号" />
@@ -34,7 +34,7 @@
 <script>
 import pageBottomPart from '../../commonBg'
 export default {
-    name: 'printFace',
+    name: 'login',
     data () {
         return {
             formData: {
@@ -113,7 +113,7 @@ $(window).scroll(function(event){
 </script>
 
 <style lang="">
-.page.printFace{
+.page.login{
     position: fixed;
     top: 40%;
     left: 50%;

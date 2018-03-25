@@ -6,44 +6,26 @@
         </div>
         <div id="content">
             <div id="sidebar">
-                <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']">
+                <Menu theme="dark" width="auto"  :active-name="openMenu" :open-names="['1']" @on-select='selectMenu'>
                     <div class="layout-logo-left"></div>
                     <Submenu name="1">
                         <template slot="title">
                             <Icon type="ios-navigate"></Icon>
-                            动漫
+                            表格
                         </template>
-                        <MenuItem name="1-1">国漫</MenuItem>
-                        <MenuItem name="1-2">日漫</MenuItem>
-                        <MenuItem name="1-3">美漫</MenuItem>
-                    </Submenu>
-                    <Submenu name="2">
-                        <template slot="title">
-                            <Icon type="ios-keypad"></Icon>
-                            动画
-                        </template>
-                        <MenuItem name="2-1">3D</MenuItem>
-                        <MenuItem name="2-2">童年</MenuItem>
-                    </Submenu>
-                    <Submenu name="3">
-                        <template slot="title">
-                            <Icon type="ios-analytics"></Icon>
-                            漫画
-                        </template>
-                        <MenuItem name="3-1">快看漫画</MenuItem>
-                        <MenuItem name="3-2">知音漫客</MenuItem>
+                        <MenuItem name="printStoneOut">打印界面</MenuItem>
+                        <MenuItem name="commonList">表单验证</MenuItem>
+                        <MenuItem name="detailField">测试打包</MenuItem>
                     </Submenu>
                 </Menu>
             </div>
             <div id="face">
-                <router-view id="main" ></router-view>
-               <!-- <Tabs type="card" closable :animated='false' @on-tab-remove="handleTabRemove">
-                    <TabPane label='动漫'>
-
-                    </TabPane>
-                    <TabPane label='动画'>动画</TabPane>
-                    <TabPane label='漫画'>漫画</TabPane>
-                </Tabs>-->
+               <Tabs type="card" :animated='false' :value='currentTab' @on-click='changeTabs' @on-tab-remove="handleTabRemove">
+					<TabPane v-for='item in tabs' :label='item.name' :key='item.key' :closable='item.key != "home"?true:false' :name='item.key'>
+						<!-- 页面内容 -->
+						<keep-alive><router-view id="main"></router-view></keep-alive>
+					</TabPane>
+                </Tabs>
             </div>
         </div>
         <div id="footer">
@@ -56,14 +38,79 @@
         name: 'layout',
         data (){
             return {
-                
+				tabs: [{
+					key: 'home',
+					name: Site.menu['home']
+				}],
+				tabsKey: [],
+				openMenu: '',
+				currentTab: 'home'
             }
         },
         methods: {
             handleTabRemove (name){
-                console.log(name);
-            }
-        }
+				_.each(this.tabsKey, (val,index) =>{
+					if(val == name){
+						this.tabsKey.splice(index,1);
+					}
+				})
+				// debugger
+				// _.each(this.tabs, (item,index) =>{
+				// 	if(item.key == name){
+				// 		this.tabs.splice(index,1)
+				// 	}
+				// })
+				// console.log(this.tabs)
+				this.$router.push({
+					name: this.tabs[this.tabs.length - 1].key
+				})
+			},
+			selectMenu(event){
+				//返回菜单的name值
+				this.currentTab = event;
+				if(this.tabsKey.indexOf(event) == -1){
+					this.tabsKey.push(event);
+					this.tabs.push({
+						key: event,
+						name: Site.menu[event]
+					})
+				}
+				//跳转路由
+				this.$router.push({
+					name: event
+				})
+			}, 
+			changeTabs(event){
+				this.currentTab = event;
+				this.openMenu = event;
+				this.$router.push({
+					name: event
+				})
+			}
+		},
+		watch: {
+			currentTab: {
+				handler(val,oldVal){
+					this.currentTab = val;
+				}
+			}
+		},
+		created(){
+			window.vm = this;
+			let routeName = this.$route.name;
+			this.tabsKey.push(routeName);
+			if(routeName != 'home'){
+				this.tabs.push({
+					key: routeName,
+					name: Site.menu[routeName]
+				})
+			}
+			this.currentTab = routeName;
+			this.openMenu = routeName;
+		},
+		activated(){
+
+		}
     }
 </script>
 <style scoped>

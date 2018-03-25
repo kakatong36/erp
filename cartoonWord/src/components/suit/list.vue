@@ -1,8 +1,12 @@
 <template>
   <div class='page detailField' :class="pageClass">
 	  <Button type='primary' style='margin-bottom: 16px;' @click='handleAdd'>新建</Button>
+	   <Button type='ghost' style='margin-bottom: 16px;' @click='search'>刷新</Button>
 	  <!-- 新表格 -->
 	  <jqTable ref='jqTable'></jqTable>
+	  <!-- 隐藏列/显示列 -->
+	  <Button type='ghost' style='margin-top: 16px;' @click='hideColumn'>隐藏列</Button>
+	  <Button type='ghost' style='margin-top: 16px;' @click='showColumn'>显示列</Button>
   </div>
 </template>
 <script>
@@ -129,8 +133,38 @@ export default {
 					]
 				},
 				cols: tableModel,
-				vm: this
+				vm: this,
+				custom: {
+					autoHeight: true
+				}
 			});
+		},
+		hideColumn (){
+			//隐藏列
+			this.$refs.jqTable.el.jqxGrid('hidecolumn', 'FieldName');
+		},
+		showColumn (){
+			//显示列
+			this.$refs.jqTable.el.jqxGrid('showcolumn', 'FieldName');
+		},
+		search (){
+			this.list.push({
+					Id : '148952562',
+					FieldCode : 'lolop',
+					FieldName : '穷逼',
+					IsShow : true,
+					IsPrint : true,
+					IsExport : true,
+					IsUse : false,
+					IsEdit : false,
+					Sort : 1,
+					BillType : '吃货单',
+					FieldType : '潜水类',
+					FieldLength : 15,
+					FieldWidth : 13,
+					FieldsArea : '基本字段'
+				})
+			this.$refs.jqTable.updata(this.list);
 		}
   	},
 	created(){
@@ -294,20 +328,21 @@ const page ={
 				datafield: "_operate",
 				width: 100,
 				editable: false,
+				pinned: 'right',
 				createRender(vm) {
 					//绑定删除事件
 					$(".detailField, .detailField").on("click", `.jqTable button._operateDel`, function() {
 						let index = Number($(this).attr('index'));
 						// vm.$refs.jqTable.del(index);
 						let data = vm.$refs.jqTable.getData(index);
-						console.log(data);
+						// console.log(data);
 					});
 					//绑定提交事件
 					$(".detailField, .detailField").on("click", `.jqTable button._operateSure`, function() {
 						let index = Number($(this).attr('index'));
 						// vm.$refs.jqTable.del(index);
 						let data = vm.$refs.jqTable.getData(index);
-						console.log(data);
+						// console.log(data);
 					});
 
 					return function(index, fieldName, value, defaultHtml, column, rowData) {

@@ -20,7 +20,7 @@ import '../../../static/jqwidgets/jqxdatetimeinput.js'
 
 
 import '../../../static/jqwidgets/jqxgrid-2.js'
-// import '../../../static/jqwidgets/jqxgrid-pinned.js'
+import '../../../static/jqwidgets/jqxgrid-pinned.js'
 import '../../../static/jqwidgets/jqxgrid.edit-2.js'
 import '../../../static/jqwidgets/jqxgrid.columnsresize.js'
 import '../../../static/jqwidgets/jqxgrid.aggregates.js'
@@ -410,6 +410,9 @@ function formatValue(data, datafields){
 			background: #d1d1d1;
 		}
 
+	}
+	.cellContainer{
+		margin: 6px;
 	}
 }
 body.jqTableProceeding{

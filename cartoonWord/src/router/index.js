@@ -34,14 +34,14 @@ export default new Router({
       ]
     },
     {
-      path: '/printFace',
-      name: 'printFace',
+      path: '/login',
+      name: 'login',
       component: resolve => require(['@/components/print/list'], resolve)
 	}
 	// ,
     // {
-    //   path: '/printFace',
-    //   name: 'printFace',
+    //   path: '/login',
+    //   name: 'login',
     //   component: resolve => require(['@/components/print/list'], resolve)
     // }
   ]
