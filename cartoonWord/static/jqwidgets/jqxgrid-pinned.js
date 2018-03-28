@@ -4894,7 +4894,7 @@
             }
             return true
         },
-        _updatecolumnwidths: function() {
+        _updatecolumnwidths: function() {	//更新表头的宽度
 			var l = this.host.width();
 			var columnWidth = this.host.width();
             var e = l;
@@ -5587,7 +5587,6 @@
 							}
 						}
 							//保证列宽调整之后，右侧固定列在页面刷新表格数据后不回到最右边
-						console.log(scrollbar_w,G)
 						if(G > 0){
 							//向左调整
 							H.css({"left": (tableWidth - rh - G - scrollbar_w )+"px", 'border-left': '1px solid #E9EAEC'});	//表格表头总宽度-固定右边列宽(该值是不随时变的)	
@@ -9577,7 +9576,7 @@
                     } else {
                         o.style.display = "none"
                     }
-                    if (! (g.hidden && g.hideable)) {
+					if (! (g.hidden && g.hideable)) {	//隐藏的那一列
 						if(g.pinned == 'right'){
 							rh += parseFloat(e);
 							if(this.vScrollBar.css('visibility') != 'hidden'){
@@ -9597,7 +9596,7 @@
 						}
                     } else {
                         o.style.display = "none"
-                    }
+					}
                 }
                 if (q == 0) {
                     p.table.width(parseFloat(h+rh) + 2);
@@ -9869,7 +9868,7 @@
                         } else {
                             d += "display: none;";
                             C._hiddencolumns = true;
-                            k++
+                            k--				//解决了隐藏列 边框不显示问题
 						}
 
                         if (z === 0 && x === 0) {
@@ -9905,7 +9904,7 @@
                     for (var x = 0; x < A; x++) {
                         h.cells.push(e[x])
                     }
-                }
+				}
 				if (u == 0) {	//数据的条数
                     var f = 0;
                     if (C.showemptyrow) {
@@ -10741,7 +10740,7 @@
                 })
             }
             if (this.rowdetails && this.showrowdetailscolumn) {		//行详细信息
-                var g = new c(k, this);
+				var g = new c(k, this);
                 g.visibleindex = d++;
                 g.width = k.groupindentwidth;
                 g.pinned = 'left';
@@ -10779,7 +10778,11 @@
                     if (this.pinned) {
 						// k._haspinned = true
 						k._haspinned = this.pinned;
-                    }
+					}
+					//如果某列表头未设置宽度，默认为100
+					if(!this.width){
+						this.width = 100;
+					}
                     if (k.showeverpresentrow) {	//显示当前行
                         if (this.datafield === "addButtonColumn" || this.datafield === "resetButtonColumn" || this.datafield === "updateButtonColumn" || this.datafield === "deleteButtonColumn") {
                             o.editable = false;

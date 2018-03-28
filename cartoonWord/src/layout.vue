@@ -55,11 +55,11 @@
 					}
 				})
 				// debugger
-				// _.each(this.tabs, (item,index) =>{
-				// 	if(item.key == name){
-				// 		this.tabs.splice(index,1)
-				// 	}
-				// })
+				_.each(this.tabs, (item,index) =>{
+					if(item.key == name){
+						this.tabs.splice(index,1)
+					}
+				})
 				// console.log(this.tabs)
 				this.$router.push({
 					name: this.tabs[this.tabs.length - 1].key
