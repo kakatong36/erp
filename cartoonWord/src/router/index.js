@@ -30,6 +30,21 @@ export default new Router({
           path: '/detailField',
           name: 'detailField',
           component: resolve => require(['@/components/suit/list'], resolve)
+        },
+        {
+          path: '/projectManagement',
+          name: 'projectManagement',
+          component: resolve => require(['@/components/projectManagement/list'], resolve)
+        },
+        {
+          path: '/dictionary',
+          name: 'dictionary',
+          component: resolve => require(['@/components/dictionary/list'], resolve)
+        },
+        {
+          path: '/supplierClass',
+          name: 'supplierClass',
+          component: resolve => require(['@/components/supplierClass/list'], resolve)
         }
       ]
     },

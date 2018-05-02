@@ -9834,7 +9834,6 @@
 								if(typeof C.width == 'string'){
 									C.width = C.table.width();	//C.width == 100% 不能用于计算
 								}
-								// console.log(C.vScrollBar[0].style.visibility)
 								if(C.vScrollBar[0].style.visibility != 'hidden'){
 									bar_w = 0;
 									if((C.vScrollBar[0].style.width).indexOf('px') > -1){
@@ -9845,18 +9844,11 @@
 								}else{
 									bar_w = 0;
 								}
-								// console.log(cWidth,bar_w)
 								if(cWidth>0){	//保证列宽调整后，刷新列表，有固定列不会回到左右边
 									//向左调整
 									d = '<div role="gridcell" style="left: ' + (C.width-Right - cWidth) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
 								}else if(cWidth <= 0){
-									//向右调整
-									// if(cWidth + bar_w != bar_w){
-										d = '<div role="gridcell" style="left: ' + (C.width-Right - bar_w) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
-									// }else{
-									// 	d = '<div role="gridcell" style="left: ' + (C.width-Right) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
-									// }
-									
+									d = '<div role="gridcell" style="left: ' + (C.width-Right - bar_w) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
 								}
 							}
                         }
@@ -9877,15 +9869,23 @@
                         d += '" class="' + l + '">';
                         var y = this._defaultcellsrenderer("", w);
                         d += y;
-                        d += "</div>";
-                        s += d
+						d += "</div>";
+						//到这里某个单元格已经是完整的了
+						if(w.pinned == 'right'){
+							// console.log(d)
+							s += d
+							// other += d;
+						}else{
+							s += d
+						}
+                        
                     }
                     if (p == 0) {
                         C.table.width(f + Right + 2);	//列撑起来的宽度//一直在变化
 						p = f + Right
                     }
-                    s += "</div>";
-                    v += s
+					s += "</div>";
+					v += s
                 }
                 if (C.WinJS) {
                     MSApp.execUnsafeLocalFunction(function() {

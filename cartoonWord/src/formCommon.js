@@ -1,5 +1,5 @@
 
-import districts from 'v-distpicker/src/districts'
+import districts from '../computer/districts'
 
 const formValidate = {
 	isMobile: (rule, value, callback) =>{

@@ -235,25 +235,6 @@ const page ={
 			},
 			{ text: "单据类型", datafield: "BillType", width: 80,
 				columntype: 'combobox',
-				// createEditor: function (vm) {
-				// 	return function (row, cellvalue, editor) {
-				// 		let source = {
-				// 			localdata: vm.billType,
-				// 			datafields: [
-				// 				{ name: 'Id' },
-				// 				{ name: 'typeName'}
-				// 			],
-				// 		};
-				// 		editor.jqxDropDownList({
-				// 			autoDropDownHeight: true,
-				// 			source: new $.jqx.dataAdapter(source),
-				// 			displayMember: "typeName",
-				// 			valueMember: 'Id'
-				// 		});
-				// 		console.log(cellvalue)
-				// 	}
-				// },
-
 				createEditorOnce: function (vm) {
 					return function (rowIndex, cellvalue, editor) {
 						let rowData = vm.$refs.jqTable.getData(rowIndex),
