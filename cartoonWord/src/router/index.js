@@ -45,6 +45,16 @@ export default new Router({
           path: '/supplierClass',
           name: 'supplierClass',
           component: resolve => require(['@/components/supplierClass/list'], resolve)
+        },
+        {
+          path: '/orderSearchDetails',
+          name: 'orderSearchDetails',
+          component: resolve => require(['@/components/order/edit'], resolve)
+        },
+        {
+          path: '/orderPrint',
+          name: 'orderPrint',
+          component: resolve => require(['@/components/order/print'], resolve)
         }
       ]
     },

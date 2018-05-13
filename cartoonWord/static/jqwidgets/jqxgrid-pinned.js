@@ -2623,6 +2623,26 @@
             var o = this.ensurerowvisible(h);
             var e = 0;
             if (this.columns.records) {
+				//处理列数据
+				var columnList = [];
+				var rightList = [];
+				var hideList = [];
+				if(this.columns.records.length>0){
+					for(var ij =0; ij < this.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(this.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList.push(this.columns.records[ij])
+							}else{
+								rightList.push(this.columns.records[ij])
+							}
+						}else{
+							hideList.push(this.columns.records[ij])
+						}
+					}
+					columnList = columnList.concat(rightList,hideList)
+					// columnList = this.columns.records;
+				}
                 var m = i;
                 if (this.hScrollBar.css("visibility") == "hidden") {
                     return
@@ -2631,7 +2651,7 @@
                 var k = 0;
                 var f = this.vScrollBar.css("visibility") == "visible" ? 20 : 0;
                 var g = false;
-                b.each(this.columns.records,
+                b.each(columnList,
                 function() {
                     if (this.hidden) {
                         return true
@@ -2754,7 +2774,27 @@
         getcolumn: function(d) {
             var e = null;
             if (this.columns.records) {
-                b.each(this.columns.records,
+				//处理列数据
+				var columnList = [];
+				var rightList = [];
+				var hideList = [];
+				if(this.columns.records.length>0){
+					for(var ij =0; ij < this.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(this.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList.push(this.columns.records[ij])
+							}else{
+								rightList.push(this.columns.records[ij])
+							}
+						}else{
+							hideList.push(this.columns.records[ij])
+						}
+					}
+					columnList = columnList.concat(rightList,hideList)
+					// columnList = this.columns.records;
+				}
+                b.each(columnList,
                 function() {
                     if (this.datafield == d || this.displayfield == d) {
                         e = this;
@@ -2777,7 +2817,27 @@
         _getcolumnindex: function(e) {
             var d = -1;
             if (this.columns.records) {
-                b.each(this.columns.records,
+				//处理列数据
+				var columnList = [];
+				var rightList = [];
+				var hideList = []
+				if(this.columns.records.length>0){
+					for(var ij =0; ij < this.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(this.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList.push(this.columns.records[ij])
+							}else{
+								rightList.push(this.columns.records[ij])
+							}
+						}else{
+							hideList.push(this.columns.records[ij])
+						}
+					}
+					columnList = columnList.concat(rightList,hideList)
+					// columnList = this.columns.records;
+				}
+                b.each(columnList,
                 function() {
                     d++;
                     if (this.datafield == e) {
@@ -2788,7 +2848,27 @@
             return d
         },
         _getcolumnat: function(d) {
-            var e = this.columns.records[d];
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            var e = columnList[d];
             return e
         },
         _getprevvisiblecolumn: function(e) {
@@ -2807,7 +2887,27 @@
         },
         _getnextvisiblecolumn: function(e) {
             var d = this.that;
-            while (e < this.columns.records.length) {
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            while (e < columnList.length) {
                 e++;
                 var f = d.getcolumnat(e);
                 if (!f) {
@@ -2820,8 +2920,28 @@
             return null
         },
         getcolumnat: function(d) {
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             if (!isNaN(d)) {
-                var e = this.columns.records[d];
+                var e = columnList[d];
                 return e
             }
             return null
@@ -3311,16 +3431,36 @@
         _updateaddnewrowui: function(g) {
             var m = this;
             var k = m.everpresentrowposition != "bottom" ? m.addnewrowtop: m.addnewrowbottom;
-            var o = m.columns.records.length;
+			var o = m.columns.records.length;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(m.columns.records && m.columns.records.length>0){
+				for(var ij =0; ij < m.columns.records.length; ij++){
+					if(!m.columns.records[ij].hidden){
+						if(m.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(m.columns.records[ij])
+						}else{
+							rightList.push(m.columns.records[ij])
+						}
+					}else{
+						hideList.push(m.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = m.columns.records;
+			}
             var f = 0;
             for (var l = 0; l < o; l++) {
-                var h = m.columns.records[l];
+                var h =columnList[l];
                 if (h.addnewrowwidget) {
                     b(h.addnewrowwidget).detach()
                 }
             }
             for (var l = 0; l < o; l++) {
-                var h = m.columns.records[l];
+                var h =columnList[l];
                 var e = h.width;
                 if (e < h.minwidth) {
                     e = h.minwidth
@@ -3377,8 +3517,28 @@
         _removeaddnewrow: function() {
             var g = this;
             var d = g.columns.records.length;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(g.columns.records && g.columns.records.length>0){
+				for(var ij =0; ij < g.columns.records.length; ij++){
+					if(!g.columns.records[ij].hidden){
+						if(g.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(g.columns.records[ij])
+						}else{
+							rightList.push(g.columns.records[ij])
+						}
+					}else{
+						hideList.push(g.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = g.columns.records;
+			}
             for (var f = 0; f < d; f++) {
-                var e = g.columns.records[f];
+                var e = columnList[f];
                 if (e.addnewrowwidget) {
                     if (e.destroyeverpresentrowwidget) {
                         e.destroyeverpresentrowwidget(e.addnewrowwidget)
@@ -3418,6 +3578,26 @@
             var f = o.everpresentrowposition != "bottom" ? o.addnewrowtop: o.addnewrowbottom;
             var t = b('<div style="position: relative;" id="row000' + o.element.id + '"></div>');
             var i = 0;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(o.columns.records && o.columns.records.length>0){
+				for(var ij =0; ij < o.columns.records.length; ij++){
+					if(!o.columns.records[ij].hidden){
+						if(o.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(o.columns.records[ij])
+						}else{
+							rightList.push(o.columns.records[ij])
+						}
+					}else{
+						hideList.push(o.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = o.columns.records;
+			}
             var z = o.columns.records.length;
             var n = o.toThemeProperty("jqx-grid-cell");
             n += " " + o.toThemeProperty("jqx-grid-cell-add-new-row");
@@ -3487,7 +3667,7 @@
                 var P = {};
                 var I = {};
                 for (var G = 0; G < z; G++) {
-                    var F = o.columns.records[G];
+                    var F = columnList[G];
                     if (!F.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3500,7 +3680,7 @@
                 }
                 var K = false;
                 for (var G = 0; G < z; G++) {
-                    var F = o.columns.records[G];
+                    var F = columnList[G];
                     if (!F.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3538,7 +3718,7 @@
                     return
                 }
                 for (var G = 0; G < z; G++) {
-                    var F = o.columns.records[G];
+                    var F = columnList[G];
                     if (!F.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3579,7 +3759,7 @@
                     }
                 }
                 for (var F = 0; F < z; F++) {
-                    var E = o.columns.records[F];
+                    var E = columnList[F];
                     if (E.reseteverpresentrowwidgetvalue) {
                         E.reseteverpresentrowwidgetvalue(E.displayfield, E.addnewrowwidget)
                     }
@@ -3592,7 +3772,7 @@
                 var P = {};
                 var J = {};
                 for (var H = 0; H < z; H++) {
-                    var G = o.columns.records[H];
+                    var G = columnList[H];
                     if (!G.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3609,7 +3789,7 @@
                 }
                 var L = false;
                 for (var H = 0; H < z; H++) {
-                    var G = o.columns.records[H];
+                    var G = columnList[H];
                     if (!G.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3647,7 +3827,7 @@
                     return
                 }
                 for (var H = 0; H < z; H++) {
-                    var G = o.columns.records[H];
+                    var G = columnList[H];
                     if (!G.geteverpresentrowwidgetvalue) {
                         continue
                     }
@@ -3669,7 +3849,7 @@
             p.mousedown(function(G) {
                 var H = {};
                 for (var F = 0; F < z; F++) {
-                    var E = o.columns.records[F];
+                    var E = columnList[F];
                     if (E.reseteverpresentrowwidgetvalue) {
                         E.reseteverpresentrowwidgetvalue(E.displayfield, E.addnewrowwidget)
                     }
@@ -3682,7 +3862,7 @@
                 o.focus()
             });
             for (var w = 0; w < z; w++) {
-                var x = o.columns.records[w];
+                var x = columnList[w];
                 var u = x.width;
                 if (u < x.minwidth) {
                     u = x.minwidth
@@ -3752,8 +3932,8 @@
                     if (!G) {
                         return
                     }
-                    for (var F = 0; F < o.columns.records.length; F++) {
-                        var j = o.columns.records[F];
+                    for (var F = 0; F < columnList.length; F++) {
+                        var j = columnList[F];
                         if (j.seteverpresentrowwidgetvalue) {
                             var E = o.getcelltext(H, j.displayfield);
                             j.seteverpresentrowwidgetvalue(j.addnewrowwidget, E)
@@ -3872,7 +4052,7 @@
                                         var Y = {};
                                         var O = {};
                                         for (var M = 0; M < z; M++) {
-                                            var K = o.columns.records[M];
+                                            var K = columnList[M];
                                             if (!K.geteverpresentrowwidgetvalue) {
                                                 continue
                                             }
@@ -4112,8 +4292,28 @@
             if (this.hScrollBar.css("visibility") == "hidden") {
                 var n = 0;
                 if (this.columns && this.columns.records) {
-                    for (var g = 0; g < this.columns.records.length; g++) {
-                        n += !isNaN(this.columns.records[g].width) ? this.columns.records[g].width: this.columns.records[g].minwidth
+					//处理列数据
+					var columnList = [];
+					var rightList = [];
+					var hideList = [];
+					if(this.columns.records.length>0){
+						for(var ij =0; ij < this.columns.records.length; ij++){
+							if(!this.columns.records[ij].hidden){
+								if(this.columns.records[ij].pinned == 'right'){
+									//数组最后插入
+									columnList.push(this.columns.records[ij])
+								}else{
+									rightList.push(this.columns.records[ij])
+								}
+							}else{
+								hideList.push(this.columns.records[ij])
+							}
+						}
+						columnList = columnList.concat(rightList,hideList)
+						// columnList = this.columns.records;
+					}
+                    for (var g = 0; g < columnList.length; g++) {
+                        n += !isNaN(columnList[g].width) ? columnList[g].width: columnList[g].minwidth
                     }
                     if (!isNaN(n) && parseInt(n) > this.host.width()) {
                         realheight -= 30
@@ -4391,6 +4591,26 @@
         },
         _preparecolumngroups: function() {
 			var o = this.columnsheight;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							rightList.push(this.columns.records[ij])
+						}else{
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             if (this.columngroups) {
                 this.columnshierarchy = new Array();
                 if (this.columngroups.length) {
@@ -4399,9 +4619,9 @@
                         this.columngroups[h].parent = null;
                         this.columngroups[h].groups = null
                     }
-                    for (var h = 0; h < this.columns.records.length; h++) {
-                        this.columns.records[h].parent = null;
-                        this.columns.records[h].groups = null
+                    for (var h = 0; h < columnList.length; h++) {
+                        columnList[h].parent = null;
+                        columnList[h].groups = null
                     }
                     var p = function(j) {
                         for (var u = 0; u < n.columngroups.length; u++) {
@@ -4430,8 +4650,8 @@
                             }
                         }
                     }
-                    for (var h = 0; h < this.columns.records.length; h++) {
-                        var q = this.columns.records[h];
+                    for (var h = 0; h < columnList.length; h++) {
+                        var q = columnList[h];
                         if (q.columngroup) {
                             var s = p(q.columngroup);
                             if (s) {
@@ -4446,8 +4666,8 @@
                         }
                     }
                     var r = 0;
-                    for (var h = 0; h < this.columns.records.length; h++) {
-                        var q = this.columns.records[h];
+                    for (var h = 0; h < columnList.length; h++) {
+                        var q = columnList[h];
                         var e = q;
                         q.level = 0;
                         while (e.parent) {
@@ -4492,7 +4712,7 @@
                         var k = new Array();
                         var t = 0;
                         for (var g = 0; g < f.length; g++) {
-                            k.push(this.columns.records.indexOf(f[g]));
+                            k.push(columnList.indexOf(f[g]));
                             if (f[g].pinned) {	//行组
                                 t++
                             }
@@ -4903,9 +5123,29 @@
             if (this.columns == undefined || this.columns.records == undefined) {
                 return
 			}
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns && this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             var o = this.that;
             var g = this.rowdetails && this.showrowdetailscolumn ? (1 + this.groups.length) * this.groupindentwidth: (this.groups.length) * this.groupindentwidth;
-            b.each(this.columns.records,
+            b.each(columnList,
             function(q, r) {
 				// console.log(r)	//每一列的数据  
 				// console.log(q)	//列头下标
@@ -4986,7 +5226,7 @@
 			var rh = 0;
             var k = this;
             var m = 0;
-            b.each(this.columns.records,
+            b.each(columnList,
             function(q, u) {
                 var s = b(this.element);
                 if (!this.hidden && this.element.style.display === "none") {
@@ -5156,7 +5396,27 @@
             var g = new Array();
             var A = new Array();
             var t = this.rowdetails && this.showrowdetailscolumn ? (1 + this.groups.length) * this.groupindentwidth: (this.groups.length) * this.groupindentwidth;
-            b.each(this.columns.records,
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            b.each(columnList,
             function(j, k) {
                 if (! (this.hidden && this.hideable)) {
                     if (this.width != "auto" && !this._width) {
@@ -5198,6 +5458,19 @@
                 } else {
                     A[A.length] = this
                 }
+                // if (this.pinned) {
+                //     if (x._haspinned) {
+                //         this.pinned = this.pinned;		//左/右区分
+                //     }
+                //     g[g.length] = this
+                // } else if (this.grouped || this.checkboxcolumn) {
+                //     if (x._haspinned) {
+                //         this.pinned = true
+                //     }
+                //     g[g.length] = this
+                // }else {
+                //     A[A.length] = this
+                // }
 			});
             if (!this.rtl) {
                 for (var D = 0; D < g.length; D++) {
@@ -5209,7 +5482,7 @@
             } else {
                 var y = 0;
                 g.reverse();
-                for (var D = this.columns.records.length - 1; D >= this.columns.records.length - g.length; D--) {
+                for (var D = columnList.length - 1; D >= columnList.length - g.length; D--) {
                     this.columns.replace(D, g[y++])
                 }
                 for (var C = 0; C < A.length; C++) {
@@ -5271,7 +5544,7 @@
             };
             var f = document.createDocumentFragment();
             var z = 0;
-            b.each(this.columns.records,
+            b.each(columnList,
             function(W, U) {
                 this.height = x.columnsheight;
                 if (x.columngroups) {
@@ -5281,12 +5554,20 @@
                     }
                 }
                 var aa = x.toTP("jqx-grid-column-header") + " " + x.toTP("jqx-widget-header");
-                if (x.rtl) {
+                if (x.rtl) {	//初始化时候从最右边走向左边
                     aa += " " + x.toTP("jqx-grid-column-header-rtl")
                 }
                 var Y = !x.rtl ? 150 + n - 1 : 150 + n + 1;
                 var S = !x.rtl ? n--:n++;
-                var H = b('<div role="columnheader" style="z-index: ' + S + ';position: absolute; height: 100%;" class="' + aa + '"><div style="height: 100%; width: 100%;"></div></div>');
+				var rightIndex = S*2;
+				var H;
+				//右边的固定列需要增大z-index值
+				if(U.pinned == 'right'){
+					H = b('<div role="columnheader" style="z-index: ' + rightIndex++ + ';position: absolute; height: 100%;" class="' + aa + '"><div style="height: 100%; width: 100%;"></div></div>')
+				}else{
+					H = b('<div role="columnheader" style="z-index: ' + S + ';position: absolute; height: 100%;" class="' + aa + '"><div style="height: 100%; width: 100%;"></div></div>')
+				}
+                // var H = b('<div role="columnheader" style="z-index: ' + S + ';position: absolute; height: 100%;" class="' + aa + '"><div style="height: 100%; width: 100%;"></div></div>');
                 if (x.columngroups) {
                     H[0].style.height = l + "px";
                     H[0].style.bottom = "0px";
@@ -5745,12 +6026,33 @@
                 return
             }
             var p = 0;
-            for (var m = 0; m < this.columns.records.length; m++) {
-                if (this.columns.records[m].pinned) {
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							rightList.push(this.columns.records[ij])
+						}else{
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}
+					}else{
+						//隐藏的一列
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            for (var m = 0; m < columnList.length; m++) {
+                if (columnList[m].pinned) {
                     p++
                 }
             }
-            var u = this.headerZIndex - p + this.columns.records.length;
+            var u = this.headerZIndex - p + columnList.length;
             var v = this.that;
             var h = v.toTP("jqx-grid-column-header") + " " + v.toTP("jqx-grid-columngroup-header") + " " + v.toTP("jqx-widget-header");
             if (v.rtl) {
@@ -6032,9 +6334,29 @@
                 if (p.disabled) {
                     return false
                 }
-                for (var v = 0; v < p.columns.records.length; v++) {
-                    if (p.columns.records[v].datafield != m.datafield) {
-                        p.columns.records[v]._menuvisible = false
+				//处理列数据
+				var columnList = [];
+				var rightList = [];
+				var hideList = []
+				if(p.columns.records && p.columns.records.length>0){
+					for(var ij =0; ij < p.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(p.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList.push(p.columns.records[ij])
+							}else{
+								rightList.push(p.columns.records[ij])
+							}
+						}else{
+							hideList.push(p.columns.records[ij])
+						}
+					}
+					columnList = columnList.concat(rightList,hideList)
+					// columnList = p.columns.records;
+				}
+                for (var v = 0; v < columnList.length; v++) {
+                    if (columnList[v].datafield != m.datafield) {
+                        columnList[v]._menuvisible = false
                     }
                 }
                 var t = k.coord(true);
@@ -6386,10 +6708,30 @@
                             }
                             var A = "<table>";
                             var y = o.deferreddatafields;
+							//处理列数据
+							var columnList = [];
+							var rightList = [];
+							var hideList = [];
+							if(o.columns.records && o.columns.records.length>0){
+								for(var ij =0; ij < o.columns.records.length; ij++){
+									if(!o.columns.records[ij].hidden){
+										if(o.columns.records[ij].pinned == 'right'){
+											//数组最后插入
+											columnList.push(o.columns.records[ij])
+										}else{
+											rightList.push(o.columns.records[ij])
+										}
+									}else{
+										hideList.push(o.columns.records[ij])
+									}
+								}
+								columnList = columnList.concat(rightList,hideList)
+								// columnList = o.columns.records;
+							}
                             if (y == null) {
                                 if (o.columns.records.length > 0) {
                                     y = new Array();
-                                    y.push(o.columns.records[0].displayfield)
+                                    y.push(columnList[0].displayfield)
                                 }
                             }
                             for (var x = 0; x < y.length; x++) {
@@ -6558,11 +6900,31 @@
             if (this.table == null) {
                 return
             }
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList= [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned != 'right'){
+							rightList.push(this.columns.records[ij])
+						}else{
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             var q = this.table[0].rows.length;
             var p = this.columnsrow;
             var r = this.groupable && this.groups.length > 0 ? this.groups.length: 0;
             var l = this.columns.records.length - r;
-            var f = this.columns.records;
+            var f = columnList;
             var n = this.dataview.rows.length == 0;
             if (this.rtl) {
                 if (this.hScrollBar.css("visibility") != "hidden") {
@@ -6576,13 +6938,19 @@
                         var d = s.cells[v];
                         if (d != undefined) {
                             var g = f[v];
-                            if (g.pinned) {
+                            if (g.pinned && (g.pinned == 'left' || g.pinned == true)) {
                                 d.style.marginLeft = k + "px";
                                 if (w == 0) {
                                     var e = p[0].cells[v];
                                     e.style.marginLeft = k + "px"
                                 }
-                            }
+                            }else if(g.pinned && g.pinned == 'right'){
+                                d.style.left = (parseInt(d.style.left) + k) + "px";
+                                if (w == 0) {
+                                    var e = p[0].cells[v];
+                                    e.style.left = k + "px"
+                                }
+							}
                         }
                     }
                 }
@@ -6595,11 +6963,11 @@
                         for (var v = 0; v < r + l; v++) {
                             var d = s.cells[v];
                             if (d != undefined) {
-                                var g = f[v];
-                                if (g.pinned) {
+                                var g = f[v];	//parseInt
+                                if (g.pinned && (g.pinned == 'left' || g.pinned == true || g.pinned == 'right')) {
                                     if (k == 0 && d.style.marginLeft == "") {
                                         continue
-                                    }
+									}
                                     var h = null;
                                     var x = null;
                                     var o = null;
@@ -6646,6 +7014,59 @@
                                             }
                                             if (o) {
                                                 o.style.marginLeft = -parseInt(u) + "px"
+                                            }
+                                        }
+                                    }
+                                }else if (g.pinned && g.pinned == 'right') {
+                                    if (k == 0 && d.style.left == "") {
+                                        continue
+									}
+                                    var h = null;
+                                    var x = null;
+                                    var o = null;
+                                    if (this.showeverpresentrow && this.addnewrowtop) {
+                                        if (this.addnewrowtop[0].cells) {
+                                            o = this.addnewrowtop[0].cells[v]
+                                        }
+                                    }
+                                    if (this.showfilterrow && this.filterrow) {
+                                        if (this.filterrow[0].cells) {
+                                            x = this.filterrow[0].cells[v]
+                                        }
+                                    }
+                                    if (this.showaggregates) {
+                                        if (this.statusbar[0].cells) {
+                                            h = this.statusbar[0].cells[v]
+                                        }
+                                    }
+                                    if (!this.rtl) {
+                                        d.style.left = k + "px";
+                                        if (w == 0) {
+                                            var e = p[0].cells[v];
+                                            e.style.left = k + "px";
+                                            if (h) {
+                                                h.style.left = k + "px"
+                                            }
+                                            if (x) {
+                                                x.style.left = k + "px"
+                                            }
+                                            if (o) {
+                                                o.style.left = k + "px"
+                                            }
+                                        }
+                                    } else {
+                                        d.style.left = -parseInt(u) + "px";
+                                        if (w == 0) {
+                                            var e = p[0].cells[v];
+                                            e.style.left = -parseInt(u) + "px";
+                                            if (h) {
+                                                h.style.left = -parseInt(u) + "px"
+                                            }
+                                            if (x) {
+                                                x.style.left = -parseInt(u) + "px"
+                                            }
+                                            if (o) {
+                                                o.style.left = -parseInt(u) + "px"
                                             }
                                         }
                                     }
@@ -6710,16 +7131,36 @@
                     end: i + m
                 }
             }
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = []
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             if (!d) {
                 for (var h = 0; h < i + m; h++) {
                     var p = h;
                     if (!o) {
-                        if (this.columns.records[h].pinned && l) {
+                        if (columnList[h].pinned && l) {
                             o = true
                         }
                     }
-                    if (!this.columns.records[h].hidden) {
-                        f += this.columns.records[h].width
+                    if (!columnList[h].hidden) {
+                        f += columnList[h].width
                     }
                     if (f >= e && k == -1) {
                         k = h
@@ -6758,11 +7199,31 @@
                     end: i + l
                 }
             }
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = []
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             if (!d) {
                 for (var h = 0; h < i + l; h++) {
                     var n = h;
-                    if (!this.columns.records[h].hidden) {
-                        f += this.columns.records[h].width
+                    if (!columnList[h].hidden) {
+                        f += columnList[h].width
                     }
                     if (f >= e && k == -1) {
                         k = h
@@ -6941,50 +7402,70 @@
                         }
                         return false
                     };
+					//处理列数据
+					var columnList = [];
+					var rightList = [];
+					var hideList = [];
+					if(this.columns.records && this.columns.records.length>0){
+						for(var ij =0; ij < this.columns.records.length; ij++){
+							if(!this.columns.records[ij].hidden){
+								if(this.columns.records[ij].pinned == 'right'){
+									//数组最后插入
+									columnList.push(this.columns.records[ij])
+								}else{
+									rightList.push(this.columns.records[ij])
+								}
+							}else{
+								hideList.push(this.columns.records[ij])
+							}
+						}
+						columnList = columnList.concat(rightList,hideList)
+						// columnList = this.columns.records;
+					}
                     for (var ag = 0; ag < A.length; ag++) {
                         var k = A[ag];
                         for (var V = 0; V < I; V++) {
                             var ai = V;
-                            if (this.columns.records[ai].pinned) {
+                            if (columnList[ai].pinned) {
                                 continue
                             }
-                            if (this.columns.records[ai].datafield == null) {
+                            if (columnList[ai].datafield == null) {
                                 continue
                             }
                             var ah = k.cells[ai];
                             if (H(ah)) {
                                 ah.parentNode.removeChild(ah)
                             }
-                            var R = this.columns.records[ai].element;
-                            this.columns.records[ai]._rendered = false;
+                            var R = columnList[ai].element;
+                            columnList[ai]._rendered = false;
                             if (H(R)) {
                                 this.columnsrow[0].removeChild(R)
                             }
                             if (this.filterrow) {
-                                if (H(this.filterrow[0].cells[ai]) && this.columns.records[ai].filterable) {
+                                if (H(this.filterrow[0].cells[ai]) && columnList[ai].filterable) {
                                     this.filterrow[0].cells[ai].parentNode.removeChild(this.filterrow[0].cells[ai])
                                 }
                             }
                         }
-                        for (var V = h; V < this.columns.records.length; V++) {
+                        for (var V = h; V < columnList.length; V++) {
                             var ai = V;
-                            if (this.columns.records[ai].pinned) {
+                            if (columnList[ai].pinned) {
                                 continue
                             }
-                            if (this.columns.records[ai].datafield == null) {
+                            if (columnList[ai].datafield == null) {
                                 continue
                             }
                             var ah = k.cells[ai];
                             if (H(ah)) {
                                 ah.parentNode.removeChild(ah)
                             }
-                            var R = this.columns.records[ai].element;
-                            this.columns.records[ai]._rendered = false;
+                            var R = columnList[ai].element;
+                            columnList[ai]._rendered = false;
                             if (H(R)) {
                                 this.columnsrow[0].removeChild(R)
                             }
                             if (this.filterrow) {
-                                if (H(this.filterrow[0].cells[ai]) && this.columns.records[ai].filterable) {
+                                if (H(this.filterrow[0].cells[ai]) && columnList[ai].filterable) {
                                     this.filterrow[0].cells[ai].parentNode.removeChild(this.filterrow[0].cells[ai])
                                 }
                             }
@@ -6995,12 +7476,12 @@
                             if (!H(ah)) {
                                 k.appendChild(ah)
                             }
-                            var R = this.columns.records[ai].element;
-                            this.columns.records[ai]._rendered = true;
+                            var R = columnList[ai].element;
+                            columnList[ai]._rendered = true;
                             if (!H(R)) {
                                 this.columnsrow[0].appendChild(R)
                             }
-                            if (this.filterrow && !H(this.filterrow[0].cells[ai]) && this.columns.records[ai].filterable) {
+                            if (this.filterrow && !H(this.filterrow[0].cells[ai]) && columnList[ai].filterable) {
                                 this.filterrow[0].firstChild.appendChild(this.filterrow[0].cells[ai])
                             }
                         }
@@ -7073,7 +7554,7 @@
                         if (this.autorowheight && (this.autoheight || this.pageable)) {
                             var O = this.rowsheight;
                             for (var V = d; V < aa; V++) {
-                                if (this.editable && this.editcell && this.editcell.column == this.columns.records[V].datafield && this.editcell.row == this.getboundindex(ad)) {
+                                if (this.editable && this.editcell && this.editcell.column == columnList[V].datafield && this.editcell.row == this.getboundindex(ad)) {
                                     if (this.editcell.editor) {
                                         O = Math.max(O, this.editcell.editor.height());
                                         continue
@@ -7163,7 +7644,7 @@
                         ag++
                     }
                     for (var V = d; V < aa; V++) {
-                        var Z = this.columns.records[V];
+                        var Z = columnList[V];
                         if (!Z.hidden) {
                             if (!Z.cellsrenderer) {
                                 var N = k.cells[V];
@@ -7256,14 +7737,14 @@
                     this.table[0].style.top = "0px";
                     for (var f = 0; f < k.cells.length; f++) {
                         var d = b(k.cells[f]);
-                        if (d.css("display") != "none" && !l) {
+                        if (d.css("display") != "none" && !l && (d.css("left") == '0px') ) {	//因为固定列（下标为0）不能盛放 无数据的提示,如果没有右边固定列（正常显示代码）
                             d[0].checkbox = null;
                             d[0].button = null;
                             d[0].className = e;
                             l = true;
                             d[0].innerHTML = "";
                             var g = b("<span style='white-space: nowrap; float: left; margin-left: 50%; position: relative;'></span>");
-                            g.text(this.gridlocalization.emptydatastring);
+                            g.text(this.gridlocalization.emptydatastring);	//没有数据提示信息
                             d.append(g);
                             var j = 0;
                             if (!this.oldhscroll) {
@@ -7441,7 +7922,27 @@
         },
         _rendervisualcell: function(z, i, p, k, t, x, j, q, d, h, s, n) {
             var f = null;
-            var g = this.columns.records[h];
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+			var g = columnList[h];		//没有取到右边固定列
             if (g.hidden) {
                 var e = q.cells[h];
                 e.innerHTML = "";
@@ -7525,7 +8026,7 @@
             if (h <= j) {
                 if (x || this.rowdetails || (this.pageable && this.virtualmode)) {
                     var u = b(e);
-                    var l = this.columns.records[h].width;
+                    var l = columnList[h].width;
                     if (e.style.width != parseInt(l) + "px") {
                         u.width(l)
                     }
@@ -7534,7 +8035,7 @@
                 if (x || this.rowdetails) {
                     if (this._hiddencolumns) {
                         var u = b(e);
-                        var l = this.columns.records[h].width;
+                        var l = columnList[h].width;
                         if (parseInt(e.style.width) != l) {
                             u.width(l)
                         }
@@ -8163,13 +8664,33 @@
             }
             m += " " + this.toTP("jqx-grid-cleared-cell");
             var p = this.table[0].rows;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             for (var k = 0; k < i + n; k++) {
                 if (p[o]) {
                     var e = p[o].cells[k];
                     if (e.className != m) {
                         e.className = m
                     }
-                    var d = this.columns.records[k];
+                    var d = columnList[k];
                     if (this._horizontalvalue != g && !d.pinned) {
                         if (this.oldhscroll == true) {
                             var h = -g;
@@ -8246,7 +8767,27 @@
             }
             var f = d;
             var e = null;
-            b.each(this.columns.records,
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            b.each(columnList,
             function() {
                 if (this.datafield == d || this.displayfield == d) {
                     f = this.text;
@@ -8261,6 +8802,26 @@
             return this._columnsbydatafield[d]
         },
         _getcolumnbydatafield: function(d) {
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
             if (this.__columnsbydatafield == undefined) {
                 this.__columnsbydatafield = new Array()
             }
@@ -8269,7 +8830,7 @@
             }
             var f = d;
             var e = null;
-            b.each(this.columns.records,
+            b.each(columnList,
             function() {
                 if (this.datafield == d || this.displayfield == d) {
                     f = this.text;
@@ -9499,7 +10060,27 @@
 			}
             var o = this.that;
             var g = this.rowdetails && this.showrowdetailscolumn ? (1 + this.groups.length) * this.groupindentwidth: (this.groups.length) * this.groupindentwidth;
-            b.each(this.columns.records,
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+            b.each(columnList,
             function(q, r) {
                 if (! (this.hidden && this.hideable)) {
                     if (this.width.toString().indexOf("%") != -1 || this._percentagewidth != undefined) {
@@ -9551,6 +10132,26 @@
             }
             var r = p.columns.records.length;
 			var t = p.table[0].rows;
+			//处理列数据
+			var columnList1 = [];
+			var rightList1 = [];
+			var hideList = [];
+			if(p.columns.records && p.columns.records.length>0){
+				for(var ij =0; ij < p.columns.records.length; ij++){
+					if(!p.columns.records[ij].hidden){
+						if(p.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList1.push(p.columns.records[ij])
+						}else{
+							rightList1.push(p.columns.records[ij])
+						}
+					}else{
+						hideList.push(p.columns.records[ij])
+					}
+				}
+				columnList1 = columnList1.concat(rightList1,hideList)
+				// columnList1 = p.columns.records;
+			}
             for (var n = 0; n < l; n++) {
                 var d = t[n];
                 if (!d) {
@@ -9560,7 +10161,7 @@
 				var h = 0;
 				var rh = 0;
                 for (var m = 0; m < r; m++) {
-                    var g = p.columns.records[m];
+                    var g = columnList1[m];
                     var e = g.width;
 					var o = s[m];
 					
@@ -9681,7 +10282,27 @@
 			var bar_w = 0;
 			var isReduce = false;
             var g = C.rowdetails && C.showrowdetailscolumn ? (1 + C.groups.length) * C.groupindentwidth: (C.groups.length) * C.groupindentwidth;
-			b.each(this.columns.records,
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(this.columns.records && this.columns.records.length>0){
+				for(var ij =0; ij < this.columns.records.length; ij++){
+					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(this.columns.records[ij])
+						}else{
+							rightList.push(this.columns.records[ij])
+						}
+					}else{
+						hideList.push(this.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = this.columns.records;
+			}
+			b.each(columnList,
 				function(j, k) {
 					if (! (this.hidden && this.hideable)) {
 						if (this.width != "auto" && !this._width) {
@@ -9792,7 +10413,28 @@
                 var v = "";
                 C._hiddencolumns = false;
 				var D = 5 + C.columns.records.length;	// 5 + 7 = 12
-				// console.log(C.columns.records)	//数据数组
+				// console.log(C.columns.records)	//数据数组(只要属性pinned有值，就会放在前面)
+				//处理列数据
+				var columnList2 = [];
+				var rightList2 = [];
+				var hideList = [];
+				//定义一个右固定列的z-index值
+				if(C.columns.records && C.columns.records.length>0){
+					for(var ij =0; ij < C.columns.records.length; ij++){
+						if(!C.columns.records[ij].hidden){
+							if(C.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList2.push(C.columns.records[ij])
+							}else{
+								rightList2.push(C.columns.records[ij])
+							}
+						}else{
+							hideList.push(C.columns.records[ij])
+						}
+					}
+					columnList2 = columnList2.concat(rightList2,hideList)
+					// columnList2 = C.columns.records;
+				}
                 for (var z = 0; z < u; z++) {	//z是下标,s 是行标记
 					var s = '<div role="row" style="position: relative; height:' + C.rowsheight + 'px;" id="row' + z + C.element.id + '">';
                     if (r) {
@@ -9802,7 +10444,7 @@
 					var f = 0;
 					var Right = 0;
                     for (var x = 0; x < A; x++) {
-						var w = C.columns.records[x];
+						var w = columnList2[x];
 						var t = w.width;
                         if (t < w.minwidth) {
                             t = w.minwidth
@@ -9822,12 +10464,13 @@
                             k++
 						}
 						//表头的宽度
-                        if (C.rtl) {	//false
+                        if (C.rtl) {	//false 从右边向左看
                             var q = k - A + 2 * x;
                             var d = '<div role="gridcell" style="left: ' + f + "px; z-index: " + q + "; width:" + t + "px;";
                             k--
-                        } else {
+                        } else {	//从左向右看表格
 							var d = '';
+							var rightIndex = k*2;
 							if(w.pinned != 'right'){	//靠左边的+没有固定列的列头
 								d = '<div role="gridcell" style="left: ' + f + "px; z-index: " + k--+"; width:" + t + "px;"
 							}else{	//右边固定列
@@ -9846,9 +10489,10 @@
 								}
 								if(cWidth>0){	//保证列宽调整后，刷新列表，有固定列不会回到左右边
 									//向左调整
-									d = '<div role="gridcell" style="left: ' + (C.width-Right - cWidth) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
+									d = '<div role="gridcell" style="left: ' + (C.width-Right - cWidth) + "px; z-index: " + rightIndex--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
 								}else if(cWidth <= 0){
-									d = '<div role="gridcell" style="left: ' + (C.width-Right - bar_w) + "px; z-index: " + k--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
+									//向右调整
+									d = '<div role="gridcell" style="left: ' + (C.width-Right - bar_w) + "px; z-index: " + rightIndex--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
 								}
 							}
                         }
@@ -9869,23 +10513,15 @@
                         d += '" class="' + l + '">';
                         var y = this._defaultcellsrenderer("", w);
                         d += y;
-						d += "</div>";
-						//到这里某个单元格已经是完整的了
-						if(w.pinned == 'right'){
-							// console.log(d)
-							s += d
-							// other += d;
-						}else{
-							s += d
-						}
-                        
+                        d += "</div>";
+                        s += d
                     }
                     if (p == 0) {
                         C.table.width(f + Right + 2);	//列撑起来的宽度//一直在变化
 						p = f + Right
                     }
-					s += "</div>";
-					v += s
+                    s += "</div>";
+                    v += s
                 }
                 if (C.WinJS) {
                     MSApp.execUnsafeLocalFunction(function() {
@@ -9905,7 +10541,7 @@
                         h.cells.push(e[x])
                     }
 				}
-				if (u == 0) {	//数据的条数
+				if (u == 0) {
                     var f = 0;
                     if (C.showemptyrow) {
                         var s = b('<div style="position: relative;" id="row0' + C.element.id + '"></div>');
@@ -9915,7 +10551,7 @@
                         C.table[0].rows[0].cells = new Array()
                     }
                     for (var x = 0; x < A; x++) {
-                        var w = C.columns.records[x];
+                        var w = columnList2[x];
                         var t = w.width;
                         if (C.showemptyrow) {
                             var d = b('<div style="position: absolute; height: 100%; left: ' + f + "px; z-index: " + k--+"; width:" + t + 'px;" class="' + l + '"></div>');
@@ -9971,12 +10607,31 @@
                 F.vScrollBar[0].style.zIndex = F.tableZIndex + F.headerZIndex;
                 F.hScrollBar[0].style.zIndex = F.tableZIndex + F.headerZIndex
 			}
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(F.columns.records && F.columns.records.length){
+				for(var ij =0; ij < F.columns.records.length; ij++){
+					if(!F.columns.records[ij].hidden){
+						if(F.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(F.columns.records[ij])
+						}else{
+							rightList.push(F.columns.records[ij])
+						}
+					}else{
+						hideList.push(F.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+			}
             if (F.autowidth) {
                 var p = 0;
-                for (var B = 0; B < F.columns.records.length; B++) {
-                    var e = F.columns.records[B].width;
+                for (var B = 0; B < columnList.length; B++) {
+                    var e = columnList[B].width;
                     if (e == "auto") {
-                        e = F._measureElementWidth(F.columns.records[B].text);
+                        e = F._measureElementWidth(columnList[B].text);
                         p += e
                     } else {
                         p += e
@@ -10426,14 +11081,35 @@
                 delete this.table
             }
             if (this.columns && this.columns.records) {
-                for (var k = 0; k < this.columns.records.length; k++) {
-                    var e = this.columns.records[k];
+				//处理列数据
+				var columnList = [];
+				var rightList = [];
+				var hideList = [];
+				if(this.columns.records.length>0){
+					for(var ij =0; ij < this.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(this.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList.push(this.columns.records[ij])
+							}else{
+								rightList.push(this.columns.records[ij])
+							}
+						}else{
+							hideList.push(this.columns.records[ij])
+						}
+					}
+					columnList = columnList.concat(rightList,hideList)
+					// columnList = this.columns.records;
+
+				}
+                for (var k = 0; k < columnList.length; k++) {
+                    var e = columnList[k];
                     if (e.addnewrowwidget) {
                         if (e.destroyeverpresentrowwidget) {
                             e.destroyeverpresentrowwidget(e.addnewrowwidget)
                         }
                     }
-                    this._removecolumnhandlers(this.columns.records[k]);
+                    this._removecolumnhandlers(columnList[k]);
                     if (e.element) {
                         b(e.element).remove();
                         b(e.sortasc).remove();
@@ -10711,8 +11387,28 @@
                 this.columns = l
 			}
             if (this.columns && this.columns.records) {
-                for (var h = 0; h < this.columns.records.length; h++) {
-                    this._removecolumnhandlers(this.columns.records[h])
+				//处理列数据
+				var columnList3 = [];
+				var rightList3 = [];
+				var hideList = [];
+				if(this.columns.records.length>0){
+					for(var ij =0; ij < this.columns.records.length; ij++){
+						if(!this.columns.records[ij].hidden){
+							if(this.columns.records[ij].pinned == 'right'){
+								//数组最后插入
+								columnList3.push(this.columns.records[ij])
+							}else{
+								rightList3.push(this.columns.records[ij])
+							}
+						}else{
+							hideList.push(this.columns.records[ij])
+						}
+					}
+					columnList3 = columnList3.concat(rightList3,hideList)
+					// columnList3 = this.columns.records;
+				}
+                for (var h = 0; h < columnList3.length; h++) {
+                    this._removecolumnhandlers(columnList3[h])
                 }
             }
 			var k = this.that;	//k == this;
@@ -10765,7 +11461,8 @@
                 g.resizable = false;
                 g.datafield = "_checkboxcolumn";
                 e.add(g)
-            }
+			}
+			// console.log(this.columns)
             var m = new Array();
             b.each(this.columns,
             function(i) {
@@ -10774,11 +11471,17 @@
                     o.visibleindex = d++;
                     if (this.dataField != undefined) {
                         this.datafield = this.dataField
-                    }
+                    }//gai
                     if (this.pinned) {
 						// k._haspinned = true
 						k._haspinned = this.pinned;
 					}
+                    // if (this.pinned == 'left' || this.pinned == true || this.pinned == 'right') {
+					// 	// k._haspinned = 'left';
+					// 	k._haspinned = true
+					// }else{
+					// 	k._haspinned = false;
+					// }
 					//如果某列表头未设置宽度，默认为100
 					if(!this.width){
 						this.width = 100;
@@ -11598,7 +12301,8 @@
             var d = this._hittestrow(p, n);
             var k = d.row;
             var l = d.index;
-            var t = this.table[0].rows[l];
+			var t = this.table[0].rows[l];
+			// console.log(this.dataview.records)
             if (this.dataview && this.dataview.records.length == 0) {
                 var o = this.table[0].rows;
                 var C = 0;
@@ -11620,13 +12324,33 @@
             var v = u.value;
             var f = 0;
             var m = this.groupable ? this.groups.length: 0;
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(r.columns.records && r.columns.records.length>0){
+				for(var ij =0; ij < r.columns.records.length; ij++){
+					if(!r.columns.records[ij].hidden){
+						if(r.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(r.columns.records[ij])
+						}else{
+							rightList.push(r.columns.records[ij])
+						}
+					}else{
+						hideList.push(r.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = r.columns.records;
+			}
             for (var w = 0; w < t.cells.length; w++) {
                 var h = parseInt(b(this.columnsrow[0].cells[w]).css("left"));
                 var j = h - v;
-				if (r.columns.records[w].pinned) {
+				if (columnList[w].pinned) {
                     j = h
                 }
-                if (r.columns.records[w].hidden) {
+                if (columnList[w].hidden) {
                     continue
                 }
                 var A = j + b(this.columnsrow[0].cells[w]).width();
@@ -11786,10 +12510,30 @@
                     s = -parseInt(this.content.css("left"))
                 }
             }
+			//处理列数据
+			var columnList = [];
+			var rightList = [];
+			var hideList = [];
+			if(l.columns.records && l.columns.records.length>0){
+				for(var ij =0; ij < l.columns.records.length; ij++){
+					if(!l.columns.records[ij].hidden){
+						if(l.columns.records[ij].pinned == 'right'){
+							//数组最后插入
+							columnList.push(l.columns.records[ij])
+						}else{
+							rightList.push(l.columns.records[ij])
+						}
+					}else{
+						hideList.push(l.columns.records[ij])
+					}
+				}
+				columnList = columnList.concat(rightList,hideList)
+				// columnList = l.columns.records;
+			}
             for (var J = 0; J < g.cells.length; J++) {
                 var K = parseInt(b(this.columnsrow[0].cells[J]).css("left"));
                 var h = K - s;
-				if (l.columns.records[J].pinned && !l.rtl) {	//右 到 左
+				if (columnList[J].pinned && !l.rtl) {	//右 到 左
                     h = K
                 }
                 var D = this._getcolumnat(J);
@@ -11805,7 +12549,7 @@
             }
             if (this.rtl && this._haspinned) {
                 for (var J = g.cells.length - 1; J >= 0; J--) {
-                    if (!l.columns.records[J].pinned) {
+                    if (!columnList[J].pinned) {
                         break
                     }
                     var K = b(this.columnsrow[0].cells[J]).coord().left - this.host.coord().left;
@@ -12379,6 +13123,7 @@
                     var d = false;
                     if (e.filterable) {
                         if (i && i.records) {
+							// console.log(i.records);
                             b.each(i.records,
                             function() {
                                 if (this.filter) {
@@ -14247,5 +14992,4 @@
         return this
     }
 })(jqxBaseFramework);
-
 

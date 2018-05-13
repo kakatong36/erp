@@ -16,6 +16,8 @@
                         <MenuItem name="printStoneOut">打印界面</MenuItem>
                         <MenuItem name="commonList">表单验证</MenuItem>
                         <MenuItem name="detailField">测试打包</MenuItem>
+                        <MenuItem name="orderSearchDetails">订单详情</MenuItem>
+                        <MenuItem name="orderPrint">打印单据</MenuItem>
                     </Submenu>
                 </Menu>
             </div>

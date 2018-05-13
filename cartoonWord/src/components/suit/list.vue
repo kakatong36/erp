@@ -186,9 +186,9 @@ export default {
 const page ={
   pageName: "detailField",
   tableModel: [
-			{ text: "字段", datafield: "FieldCode", width: 100 },
-			{ text: "字段名", datafield: "FieldName", width: 100 },
-			{ text: "是否显示", datafield: "IsShow", width: 60,
+			{ text: "字段", datafield: "FieldCode", width: 200,editable:false },
+			{ text: "字段名", datafield: "FieldName", width: 200,editable:false },
+			{ text: "是否显示", datafield: "IsShow", width: 100,editable:false,
 				//复选框
 				columntype: 'checkbox',
 				createChange: function(vm){
@@ -197,7 +197,7 @@ const page ={
 					}
 				}
 			},
-			{ text: "是否打印", datafield: "IsPrint", width: 60,
+			{ text: "是否打印", datafield: "IsPrint", width: 100,editable:false,
 				//复选框
 				columntype: 'checkbox',
 				createChange: function(vm){
@@ -206,7 +206,7 @@ const page ={
 					}
 				}
 			},
-			{ text: "是否可用", datafield: "IsUse", width: 60,
+			{ text: "是否可用", datafield: "IsUse", width: 100,editable:false,
 				//复选框
 				columntype: 'checkbox',
 				createChange: function(vm){
@@ -215,7 +215,7 @@ const page ={
 					}
 				}
 			},
-			{ text: "是否导出", datafield: "IsExport", width: 60,
+			{ text: "是否导出", datafield: "IsExport", width: 100,editable:false,
 				//复选框
 				columntype: 'checkbox',
 				createChange: function(vm){
@@ -224,7 +224,7 @@ const page ={
 					}
 				}
 			},			
-			{ text: "是否可编辑", datafield: "IsEdit", width: 80,
+			{ text: "是否可编辑", datafield: "IsEdit", width: 120,editable:false,
 				//复选框
 				columntype: 'checkbox',
 				createChange: function(vm){
@@ -233,7 +233,7 @@ const page ={
 					}
 				}
 			},
-			{ text: "单据类型", datafield: "BillType", width: 80,
+			{ text: "单据类型", datafield: "BillType", width: 100,editable:false,
 				columntype: 'combobox',
 				createEditorOnce: function (vm) {
 					return function (rowIndex, cellvalue, editor) {
@@ -281,7 +281,7 @@ const page ={
 					}
 				}
 			},
-			{ text: "字段类型", datafield: "FieldType", width: 80,
+			{ text: "字段类型", datafield: "FieldType", width: 100,editable:false,
 				columntype: 'dropdownlist',
 				createEditor: function (vm) {
 					return function (row, cellvalue, editor) {
@@ -300,14 +300,24 @@ const page ={
 					}
 				}
 			},
-			{ text: "字段长度", datafield: "FieldLength", width: 60 , cellsformat: 'n0'},
-			{ text: "字段宽度", datafield: "FieldWidth", width: 60, cellsformat: 'n0' },
-			{ text: "字段域", datafield: "FieldsArea", width: 60 },
-			{ text: "排序", datafield: "Sort", width: 60 },
+
+			{ text: "ook", datafield: "abc", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "FieldLedddngth", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "ghhgh", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "jhjhj", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "dree", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "jhgjgh", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "ook", datafield: "kjkjk", width: 100 , cellsformat: 'n0',editable:false},
+			
+			{ text: "ook", datafield: "tttyuy", width: 100 , cellsformat: 'n0',editable:false},
+			{ text: "字段宽度", datafield: "FieldWidth", width: 100, cellsformat: 'n0',editable:false },
+			{ text: "字段域", datafield: "FieldsArea", width: 100 ,editable:false},
+			{ text: "排序", datafield: "Sort", width: 100,editable:false },
 			{
 				text: "操作",
 				datafield: "_operate",
-				width: 100,
+				width: 300,
+				pinned: true,
 				editable: false,
 				pinned: 'right',
 				createRender(vm) {
