@@ -8,7 +8,8 @@ const menu = {
 	projectManagement: '服务配置',
 	supplierClass: '供应商分类',
 	orderSearchDetails: "订单详情",
-	orderPrint: "打印单据"
+	orderPrint: "打印单据",
+	searchIntervalConfig: "区间配置"
  }
 
  _.extend(menu);

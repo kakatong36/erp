@@ -2631,7 +2631,7 @@
 					for(var ij =0; ij < this.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(this.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList.push(this.columns.records[ij])
 							}else{
 								rightList.push(this.columns.records[ij])
@@ -2782,7 +2782,7 @@
 					for(var ij =0; ij < this.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(this.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList.push(this.columns.records[ij])
 							}else{
 								rightList.push(this.columns.records[ij])
@@ -2825,7 +2825,7 @@
 					for(var ij =0; ij < this.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(this.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList.push(this.columns.records[ij])
 							}else{
 								rightList.push(this.columns.records[ij])
@@ -2856,7 +2856,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -2895,7 +2895,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -2928,7 +2928,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -3440,7 +3440,7 @@
 				for(var ij =0; ij < m.columns.records.length; ij++){
 					if(!m.columns.records[ij].hidden){
 						if(m.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(m.columns.records[ij])
 						}else{
 							rightList.push(m.columns.records[ij])
@@ -3525,7 +3525,7 @@
 				for(var ij =0; ij < g.columns.records.length; ij++){
 					if(!g.columns.records[ij].hidden){
 						if(g.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(g.columns.records[ij])
 						}else{
 							rightList.push(g.columns.records[ij])
@@ -3586,7 +3586,7 @@
 				for(var ij =0; ij < o.columns.records.length; ij++){
 					if(!o.columns.records[ij].hidden){
 						if(o.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(o.columns.records[ij])
 						}else{
 							rightList.push(o.columns.records[ij])
@@ -4300,7 +4300,7 @@
 						for(var ij =0; ij < this.columns.records.length; ij++){
 							if(!this.columns.records[ij].hidden){
 								if(this.columns.records[ij].pinned == 'right'){
-									//数组最后插入
+									
 									columnList.push(this.columns.records[ij])
 								}else{
 									rightList.push(this.columns.records[ij])
@@ -4601,7 +4601,7 @@
 						if(this.columns.records[ij].pinned == 'right'){
 							rightList.push(this.columns.records[ij])
 						}else{
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}
 					}else{
@@ -5131,7 +5131,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -5305,7 +5305,7 @@
                 // if (parseInt(s[0].style.left) != h) {
                 //     s.css("left", h)
                 // }
-                if (! (this.hidden && this.hideable)) {
+                if (! (this.hidden && this.hideable)) {	
 					if(this.pinned != 'right'){
 						s.css("left", h)
 						h += this.width
@@ -5321,13 +5321,11 @@
 							}else{
 								bar_w = Number(o.vScrollBar.css('width')) + 5;
 							}
-						}
-						if(l > 0){	//表头宽度调整时，去掉滚动条宽度
-							s.css("left", columnWidth - rh - l - bar_w)
 						}else{
-							s.css("left", columnWidth - rh - bar_w);
+							bar_w = 0
 						}
-						//(columnWidth - rh)这个值不会改变的，动态表格宽度改变造成影响
+						s.css("size", (columnWidth - rh + parseInt(this.width) - parseInt(bar_w)) + 'px');
+						s.css("right", "0px")
 					}
                     
                 }
@@ -5390,9 +5388,12 @@
 			var rh = 0;
             var u = "";
 			var G = this.host.width();
+			var loop = this.host.width();
+			var totalWidth = 0;
 			var s = G;
 			var scrollbar_w = 0;
 			var tableWidth = G;
+			var oldTableWidth = 0;
             var g = new Array();
             var A = new Array();
             var t = this.rowdetails && this.showrowdetailscolumn ? (1 + this.groups.length) * this.groupindentwidth: (this.groups.length) * this.groupindentwidth;
@@ -5403,8 +5404,15 @@
 			if(this.columns.records && this.columns.records.length>0){
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].width){
+							totalWidth += parseInt(this.columns.records[ij].width);
+							oldTableWidth += parseInt(this.columns.records[ij].width);
+						}else{
+							oldTableWidth += 100
+							totalWidth += 100
+						}
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -5859,27 +5867,21 @@
                 if (! (this.hidden && this.hideable)) {
 					if(this.pinned == 'right'){	//右边	//pp
 						rh += P;
-						// console.log(x.vScrollBar.css('visibility'))
 						if(x.vScrollBar.css('visibility') != 'hidden'){
 							if(x.vScrollBar.css('width').indexOf('px') > -1){
 								scrollbar_w = Number(x.vScrollBar.css('width').split('px')[0]) + 5;
 							}else{
 								scrollbar_w = Number(x.vScrollBar.css('width')) + 5;
 							}
-						}
-							//保证列宽调整之后，右侧固定列在页面刷新表格数据后不回到最右边
-						if(G > 0){
-							//向左调整
-							H.css({"left": (tableWidth - rh - G - scrollbar_w )+"px", 'border-left': '1px solid #E9EAEC'});	//表格表头总宽度-固定右边列宽(该值是不随时变的)	
-						}else if(G < 0){
-							//向右调整
-							// if(G + scrollbar_w != 0){ //表格表头总宽度-固定右边列宽(该值是不随时变的)	
-								H.css({"left": (tableWidth - rh - scrollbar_w)+"px", 'border-left': '1px solid #E9EAEC'});
-							// }else{
-							// 	H.css({"left": (tableWidth - rh )+"px", 'border-left': '1px solid #E9EAEC'});
-							// }
 						}else{
-							H.css({"left": (tableWidth - rh )+"px", 'border-left': '1px solid #E9EAEC'});
+							scrollbar_w = 0;
+						}
+						//表头样式 //zwt
+						var width = parseInt(H.css('width'))
+						if(parseInt(scrollbar_w) > 0){
+							H.css({"right": "0px", 'border-left': '1px solid #E9EAEC','size': (parseInt(loop) - rh + width - parseInt(scrollbar_w))});
+						}else{
+							H.css({"right": "0px", 'border-left': '1px solid #E9EAEC','size': (parseInt(loop) - rh + width)});
 						}
 					}
                 }
@@ -5928,7 +5930,7 @@
                         x._checkboxcolumnupdating = false
                     }
                 }
-            });
+			});
             if (h > 0) {
                 this.columnsheader.width(2 + h + rh)	//表头的宽度
             } else {
@@ -5997,7 +5999,7 @@
             } else {
                 o[0].style.visibility = "inherit"
             }
-			o.width(h + rh);
+			o.width(h + rh + 2);
 			// o.width(h);
             if (this._handlecolumnsdragdrop) {
                 this._handlecolumnsdragdrop()
@@ -6036,7 +6038,7 @@
 						if(this.columns.records[ij].pinned == 'right'){
 							rightList.push(this.columns.records[ij])
 						}else{
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}
 					}else{
@@ -6342,7 +6344,7 @@
 					for(var ij =0; ij < p.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(p.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList.push(p.columns.records[ij])
 							}else{
 								rightList.push(p.columns.records[ij])
@@ -6716,7 +6718,7 @@
 								for(var ij =0; ij < o.columns.records.length; ij++){
 									if(!o.columns.records[ij].hidden){
 										if(o.columns.records[ij].pinned == 'right'){
-											//数组最后插入
+											
 											columnList.push(o.columns.records[ij])
 										}else{
 											rightList.push(o.columns.records[ij])
@@ -6904,13 +6906,19 @@
 			var columnList = [];
 			var rightList = [];
 			var hideList= [];
+			var tableWidth = 0;
 			if(this.columns.records && this.columns.records.length>0){
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].width){
+							tableWidth += parseInt(this.columns.records[ij].width)
+						}else{
+							tableWidth += 100
+						}
 						if(this.columns.records[ij].pinned != 'right'){
 							rightList.push(this.columns.records[ij])
 						}else{
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}
 					}else{
@@ -6938,18 +6946,23 @@
                         var d = s.cells[v];
                         if (d != undefined) {
                             var g = f[v];
-                            if (g.pinned && (g.pinned == 'left' || g.pinned == true)) {
+                            if (g.pinned && g.pinned != 'right') {
                                 d.style.marginLeft = k + "px";
                                 if (w == 0) {
                                     var e = p[0].cells[v];
                                     e.style.marginLeft = k + "px"
                                 }
                             }else if(g.pinned && g.pinned == 'right'){
-                                d.style.left = (parseInt(d.style.left) + k) + "px";
-                                if (w == 0) {
-                                    var e = p[0].cells[v];
-                                    e.style.left = k + "px"
-                                }
+								d.style.left = null;
+								d.style.marginLeft = null;	
+								d.style.right = parseInt(tableWidth) - parseInt(d.style.size) - k - 1+ "px";	//单元格
+								if(w == 0){
+									var e = p[0].cells[v];
+									e.style.left = null;	//去掉左固定
+									e.style.marginLeft = null;  //去掉左margin
+									var right = parseInt(tableWidth) - parseInt(e.style.size) - k
+									e.style.right = right + "px";
+								}
 							}
                         }
                     }
@@ -6963,11 +6976,11 @@
                         for (var v = 0; v < r + l; v++) {
                             var d = s.cells[v];
                             if (d != undefined) {
-                                var g = f[v];	//parseInt
-                                if (g.pinned && (g.pinned == 'left' || g.pinned == true || g.pinned == 'right')) {
+                                var g = f[v];
+                                if (g.pinned && g.pinned != 'right') {
                                     if (k == 0 && d.style.marginLeft == "") {
                                         continue
-									}
+                                    }
                                     var h = null;
                                     var x = null;
                                     var o = null;
@@ -7017,10 +7030,10 @@
                                             }
                                         }
                                     }
-                                }else if (g.pinned && g.pinned == 'right') {
-                                    if (k == 0 && d.style.left == "") {
+                                }else if(g.pinned && g.pinned == 'right') {
+                                    if (k == 0 && d.style.right == "") {
                                         continue
-									}
+                                    }
                                     var h = null;
                                     var x = null;
                                     var o = null;
@@ -7039,41 +7052,46 @@
                                             h = this.statusbar[0].cells[v]
                                         }
                                     }
-                                    if (!this.rtl) {
-                                        d.style.left = k + "px";
+                                    if (!this.rtl) { //change 位置的调整在此实现
+										/*单元格处理 */
+										d.style.left = null;
+										d.style.marginRight = null;
+										if((parseInt(tableWidth) - parseInt(d.style.size) - k) < 0){
+											d.style.marginRight = 0 + "px";
+										}else{
+											d.style.marginRight = (parseInt(tableWidth) - parseInt(d.style.size) - k)  + "px";
+										}
                                         if (w == 0) {
-                                            var e = p[0].cells[v];
-                                            e.style.left = k + "px";
+											/*表头处理 */
+											var e = p[0].cells[v];
+											e.style.left = null;
+											e.style.marginLeft = 100 + "px"
+											e.style.marginRight = null;
+											var right = parseInt(tableWidth) - parseInt(e.style.size) - k
+											if(right < 0){
+												e.style.marginRight = 0 + "px";
+											}else{
+												e.style.marginRight = right + "px";
+											}
                                             if (h) {
-                                                h.style.left = k + "px"
+												if ((parseInt(tableWidth) - parseInt(h.style.size) - k ) < 0){
+													h.style.marginRight = 0 + "px"
+												}else{
+													h.style.marginRight = (parseInt(tableWidth) - parseInt(h.style.size) - k ) + "px"
+												}
                                             }
                                             if (x) {
-                                                x.style.left = k + "px"
+                                                x.style.marginRight = right + "px"
                                             }
                                             if (o) {
-                                                o.style.left = k + "px"
+                                                o.style.marginRight = right + "px"
                                             }
-                                        }
-                                    } else {
-                                        d.style.left = -parseInt(u) + "px";
-                                        if (w == 0) {
-                                            var e = p[0].cells[v];
-                                            e.style.left = -parseInt(u) + "px";
-                                            if (h) {
-                                                h.style.left = -parseInt(u) + "px"
-                                            }
-                                            if (x) {
-                                                x.style.left = -parseInt(u) + "px"
-                                            }
-                                            if (o) {
-                                                o.style.left = -parseInt(u) + "px"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                		}
+									}
+								}
+							}
+						}
+					}
                     this.table[0].style.marginLeft = -k + "px";
                     p[0].style.marginLeft = -k + "px"
                 } else {
@@ -7139,7 +7157,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -7207,7 +7225,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -7410,7 +7428,7 @@
 						for(var ij =0; ij < this.columns.records.length; ij++){
 							if(!this.columns.records[ij].hidden){
 								if(this.columns.records[ij].pinned == 'right'){
-									//数组最后插入
+									
 									columnList.push(this.columns.records[ij])
 								}else{
 									rightList.push(this.columns.records[ij])
@@ -7930,7 +7948,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -8672,7 +8690,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -8691,7 +8709,7 @@
                         e.className = m
                     }
                     var d = columnList[k];
-                    if (this._horizontalvalue != g && !d.pinned) {
+                    if (this._horizontalvalue != g && !d.pinned) {	//loop
                         if (this.oldhscroll == true) {
                             var h = -g;
                             e.style.marginLeft = -g + "px"
@@ -8775,7 +8793,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -8810,7 +8828,7 @@
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -10039,10 +10057,13 @@
             }
             return - 1
 		},
-		/*数据单元格宽度调整 */
-		_updatecellwidths: function() {		//更换表头单元格宽度的时候触发
+		/*数据单元格宽度调整 */ //oop
+		_updatecellwidths: function() {	//更换表头单元格宽度的时候触发
 			var tableWidth = this.width;
-			var cell = this.host.width();
+			var cell = this.host.width();	
+			var loop = this.host.width();	//可见表格宽度(不改变)
+			var allTableWidth = 0;
+			var oldTableWidth = 0;
 			var e = cell;
 			let G = 0;
 			var j = "";
@@ -10064,11 +10085,18 @@
 			var columnList = [];
 			var rightList = [];
 			var hideList = [];
+			if(p.table[0] && p.table[0].scrollWidth){
+				oldTableWidth = p.table[0].scrollWidth
+			}
 			if(this.columns.records && this.columns.records.length>0){
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].width){
+							allTableWidth += parseInt(this.columns.records[ij].width)
+						}else{
+							allTableWidth += 100
+						}
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -10104,7 +10132,7 @@
                         cell -= r
                     } else {
                         if (this.width != "auto" && !this._width) {
-                            cell -= this.width
+							cell -= this.width
                         } else {
                             j += this.text
                         }
@@ -10140,7 +10168,7 @@
 				for(var ij =0; ij < p.columns.records.length; ij++){
 					if(!p.columns.records[ij].hidden){
 						if(p.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+
 							columnList1.push(p.columns.records[ij])
 						}else{
 							rightList1.push(p.columns.records[ij])
@@ -10150,7 +10178,6 @@
 					}
 				}
 				columnList1 = columnList1.concat(rightList1,hideList)
-				// columnList1 = p.columns.records;
 			}
             for (var n = 0; n < l; n++) {
                 var d = t[n];
@@ -10162,9 +10189,9 @@
 				var rh = 0;
                 for (var m = 0; m < r; m++) {
                     var g = columnList1[m];
-                    var e = g.width;
+					var e = g.width;
 					var o = s[m];
-					
+
                     if (parseInt(o.style.width) != e) {
                         o.style.width = e + "px"
                     }
@@ -10179,7 +10206,7 @@
                     }
 					if (! (g.hidden && g.hideable)) {	//隐藏的那一列
 						if(g.pinned == 'right'){
-							rh += parseFloat(e);
+							rh += parseFloat(e);	//右固定的列宽(改变后的)
 							if(this.vScrollBar.css('visibility') != 'hidden'){
 								if(this.vScrollBar.css('width').indexOf('px') > -1){
 									scrollbar_w = Number(this.vScrollBar.css('width').split('px')[0]) + 5;
@@ -10189,11 +10216,8 @@
 							}else{
 								scrollbar_w = 0;
 							}
-							if(cell > 0){	//向左调整
-								o.style.left = (tableWidth - rh - cell) + "px"
-							}else{	//向右调整
-								o.style.left = (tableWidth - rh - scrollbar_w) + "px"
-							}
+							o.style.right = "0px"
+							o.style.size = (parseInt(loop) - rh + parseInt(o.style.width) - parseInt(scrollbar_w)) + "px"
 						}
                     } else {
                         o.style.display = "none"
@@ -10276,11 +10300,17 @@
 			var C = this.that;
 			/*减去多余宽度 */
 			var cWidth = C.host.width();
+			var loop = C.host.width()
 			var s = cWidth;
 			var j = "";
 			var ow = this.that;
 			var bar_w = 0;
 			var isReduce = false;
+			var totalWidth = 0;
+			var allTableWidth = 0;
+			if(C.table && C.table[0]){
+				totalWidth = C.table[0].scrollWidth
+			}
             var g = C.rowdetails && C.showrowdetailscolumn ? (1 + C.groups.length) * C.groupindentwidth: (C.groups.length) * C.groupindentwidth;
 			//处理列数据
 			var columnList = [];
@@ -10289,8 +10319,13 @@
 			if(this.columns.records && this.columns.records.length>0){
 				for(var ij =0; ij < this.columns.records.length; ij++){
 					if(!this.columns.records[ij].hidden){
+						if(this.columns.records[ij].width){
+							allTableWidth += parseInt(this.columns.records[ij].width)
+						}else{
+							allTableWidth += 100
+						}
 						if(this.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(this.columns.records[ij])
 						}else{
 							rightList.push(this.columns.records[ij])
@@ -10423,7 +10458,7 @@
 					for(var ij =0; ij < C.columns.records.length; ij++){
 						if(!C.columns.records[ij].hidden){
 							if(C.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList2.push(C.columns.records[ij])
 							}else{
 								rightList2.push(C.columns.records[ij])
@@ -10487,13 +10522,8 @@
 								}else{
 									bar_w = 0;
 								}
-								if(cWidth>0){	//保证列宽调整后，刷新列表，有固定列不会回到左右边
-									//向左调整
-									d = '<div role="gridcell" style="left: ' + (C.width-Right - cWidth) + "px; z-index: " + rightIndex--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
-								}else if(cWidth <= 0){
-									//向右调整
-									d = '<div role="gridcell" style="left: ' + (C.width-Right - bar_w) + "px; z-index: " + rightIndex--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;"
-								}
+								//zwt
+								d = '<div role="gridcell" style="right: ' + 0 + "px; z-index: " + rightIndex--+"; width:" + t + "px;"+"border-left: 1px solid #E9EAEC;size:" + (parseInt(loop) - parseInt(bar_w) - Right + t)+"px"
 							}
                         }
 						if (! (w.hidden && w.hideable)) {	//非隐藏列表头
@@ -10615,7 +10645,7 @@
 				for(var ij =0; ij < F.columns.records.length; ij++){
 					if(!F.columns.records[ij].hidden){
 						if(F.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(F.columns.records[ij])
 						}else{
 							rightList.push(F.columns.records[ij])
@@ -11089,7 +11119,7 @@
 					for(var ij =0; ij < this.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(this.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList.push(this.columns.records[ij])
 							}else{
 								rightList.push(this.columns.records[ij])
@@ -11395,7 +11425,7 @@
 					for(var ij =0; ij < this.columns.records.length; ij++){
 						if(!this.columns.records[ij].hidden){
 							if(this.columns.records[ij].pinned == 'right'){
-								//数组最后插入
+								
 								columnList3.push(this.columns.records[ij])
 							}else{
 								rightList3.push(this.columns.records[ij])
@@ -12332,7 +12362,7 @@
 				for(var ij =0; ij < r.columns.records.length; ij++){
 					if(!r.columns.records[ij].hidden){
 						if(r.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(r.columns.records[ij])
 						}else{
 							rightList.push(r.columns.records[ij])
@@ -12518,7 +12548,7 @@
 				for(var ij =0; ij < l.columns.records.length; ij++){
 					if(!l.columns.records[ij].hidden){
 						if(l.columns.records[ij].pinned == 'right'){
-							//数组最后插入
+							
 							columnList.push(l.columns.records[ij])
 						}else{
 							rightList.push(l.columns.records[ij])
@@ -12534,8 +12564,13 @@
                 var K = parseInt(b(this.columnsrow[0].cells[J]).css("left"));
                 var h = K - s;
 				if (columnList[J].pinned && !l.rtl) {	//右 到 左
+					// K = parseInt(b(this.columnsrow[0].cells[J]).css("left"));
                     h = K
                 }
+				// if (columnList[J].pinned && columnList[J].pinned == 'right' && !l.rtl) {	//右 到 左
+				// 	K = parseInt(b(this.columnsrow[0].cells[J]).css("right"));
+                //     h = K
+                // }
                 var D = this._getcolumnat(J);
                 if (D != null && D.hidden) {
                     continue

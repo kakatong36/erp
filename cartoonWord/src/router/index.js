@@ -55,6 +55,11 @@ export default new Router({
           path: '/orderPrint',
           name: 'orderPrint',
           component: resolve => require(['@/components/order/print'], resolve)
+        },
+        {
+          path: '/searchIntervalConfig',
+          name: 'searchIntervalConfig',
+          component: resolve => require(['@/components/intervalConfig/list'], resolve)
         }
       ]
     },

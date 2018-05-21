@@ -135,7 +135,8 @@ export default {
 				cols: tableModel,
 				vm: this,
 				custom: {
-					autoHeight: true
+					height: 200
+					// autoHeight: true
 				}
 			});
 		},
@@ -186,8 +187,8 @@ export default {
 const page ={
   pageName: "detailField",
   tableModel: [
-			{ text: "字段", datafield: "FieldCode", width: 200,editable:false },
-			{ text: "字段名", datafield: "FieldName", width: 200,editable:false },
+			{ text: "字段", datafield: "FieldCode", width: 120,editable:false },
+			{ text: "字段名", datafield: "FieldName", width: 120,editable:false },
 			{ text: "是否显示", datafield: "IsShow", width: 100,editable:false,
 				//复选框
 				columntype: 'checkbox',
@@ -324,9 +325,9 @@ const page ={
 					//绑定删除事件
 					$(".detailField, .detailField").on("click", `.jqTable button._operateDel`, function() {
 						let index = Number($(this).attr('index'));
-						// vm.$refs.jqTable.del(index);
-						let data = vm.$refs.jqTable.getData(index);
+						// let data = vm.$refs.jqTable.getData(index);
 						// console.log(data);
+						vm.$refs.jqTable.del(index);
 					});
 					//绑定提交事件
 					$(".detailField, .detailField").on("click", `.jqTable button._operateSure`, function() {
