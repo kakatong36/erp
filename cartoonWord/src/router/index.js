@@ -60,7 +60,28 @@ export default new Router({
           path: '/searchIntervalConfig',
           name: 'searchIntervalConfig',
           component: resolve => require(['@/components/intervalConfig/list'], resolve)
-        }
+		},
+		{
+			path: '/menuIndex',
+			name: 'menuIndex',
+			component: resolve => require(['@/components/menu/index'], resolve)
+		},{
+			path: '/discountManage/:levelId',
+			name: 'discountManage',
+			component: resolve => require(['@/components/member/list'], resolve)
+		},{
+			path: '/regularGoods/:id',
+			name: 'regularGoods',
+			component: resolve => require(['@/components/regularGoods/list'], resolve)
+		},{
+			path: '/accountManage',
+			name: 'accountManage',
+			component: resolve => require(['@/components/usercenter/accountManage'], resolve)
+		},{
+			path: '/orderView',
+			name: 'orderView',
+			component: resolve => require(['@/components/order/view'], resolve)
+		}
       ]
     },
     {

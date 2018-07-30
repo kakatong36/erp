@@ -19,10 +19,10 @@
 	</div>
 </template>
 <script>
-import m_auth from '@/../mixins/auth'
+// import m_auth from '@/../mixins/auth'
 	export default {
 		name: "searchIntervalConfig",
-		mixins: [m_auth],
+		// mixins: [m_auth],
 		data(){
 			return {
 				tab: {

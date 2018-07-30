@@ -349,7 +349,4 @@ const page ={
   }
 </script>
 <style>
-	.detailField{
-
-	}
 </style>
