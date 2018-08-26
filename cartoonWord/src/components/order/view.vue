@@ -676,11 +676,7 @@
 				},
 				deep: true
 			}*/
-		}.
-
-
-		.
-		···	
+		}
 	}
 	const page = {
 		name: "orderView",

@@ -81,6 +81,22 @@ export default new Router({
 			path: '/orderView',
 			name: 'orderView',
 			component: resolve => require(['@/components/order/view'], resolve)
+		},{
+			path: '/supplierManagement',
+			name: 'supplierManagement',
+			component: resolve => require(['@/components/suplie/list'], resolve)
+		},{
+			path: '/warehouse',
+			name: 'warehouse',
+			component: resolve => require(['@/components/warehouse/list'], resolve)
+		},{
+			path: '/render',
+			name: 'render',
+			component: resolve => require(['@/components/render/render'], resolve)
+		},{
+			path: '/accountManagement',
+			name: 'accountManagement',
+			component: resolve => require(['@/components/accent/list'], resolve)
 		}
       ]
     },

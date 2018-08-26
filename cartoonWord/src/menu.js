@@ -9,7 +9,8 @@ const menu = {
 	supplierClass: '供应商分类',
 	orderSearchDetails: "订单详情",
 	orderPrint: "打印单据",
-	searchIntervalConfig: "区间配置"
+	searchIntervalConfig: "区间配置",
+	render: "自定义创建"
  }
 
  _.extend(menu);
