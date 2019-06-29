@@ -1,7 +1,8 @@
 <template>
   <div class='page detailField' :class="pageClass">
-	  <Button type='primary' style='margin-bottom: 16px;' @click='handleAdd'>新建</Button>
+	  <Button type='primary' style='margin-bottom: 16px;' @click='handleAdd(1)'>新建</Button>
 	   <Button type='ghost' style='margin-bottom: 16px;' @click='search'>刷新</Button>
+	   <Button type='ghost' style='margin-bottom: 16px;' @click='handleAdd(2)'>新增2行</Button>
 	  <!-- 新表格 -->
 	  <jqTable ref='jqTable'></jqTable>
 	  <!-- 隐藏列/显示列 -->
@@ -106,9 +107,30 @@ export default {
 			]
 			this.list = tableExistData;
 		},
-		handleAdd (){
+		handleAdd (num){
+			// 只要传进数字就好
+			if (!num) {
+				num = 1;
+			}
 			var jqTable = this.$refs.jqTable;
-			jqTable.el.jqxGrid('addrow', null, {});
+			let addrowList = [];
+			for (let i = 1; i <= num; i++) {
+				addrowList.push({
+					FieldCode: "",
+					FieldName: "",
+					IsShow: true,
+					IsPrint: true,
+					IsUse: true,
+					IsExport: true,
+					IsEdit: true,
+					BillType: "",
+					FieldType: "",
+					FieldLength: 10,
+					FieldsArea: "",
+					Sort: 0
+				});
+			}
+			jqTable.el.jqxGrid('addrow', null, addrowList);
 			//第一行数据添加空表行    得到（有bug产生）
 		},
 		createTable(tableModel) {
